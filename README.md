@@ -4,7 +4,7 @@ Tsohan harjoitustyö, alkukesä 2020
 --------
 
 ### Aihekuvaus
-Kurssikeskus järjestää maksullisia ohjelmoinnin kursseja. Jokaisen ohjelmointikielen kursseja on vuoden aikana useampia. Joidenkin kurssien osallistumismäärä on rajoitettu 20 opiskelijaan, toisilla rajoituksia ei ole. Kursseista on laadittu esitteet ml. aika, paikka, opettajat ja kurssin sisältö. Kuka tahansa voi ilmoittautua kursseille. Ilmoittautuneiden täytyy maksaa varausmaksu. Tarkemmat maksutiedot lähetetään ilmoittautumisen jälkeen. Ilmoittautunut saa halutessaan laskun.
+Kurssikeskus järjestää maksullisia ohjelmoinnin kursseja. Jokaisen ohjelmointikielen kursseja on vuoden aikana useampia. Joidenkin kurssien osallistumismäärä on rajoitettu 20 opiskelijaan, toisilla rajoituksia ei ole. Kursseista on laadittu esitteet, joista selviävät ajat, paikat, opettajat ja kurssien sisältö. Kuka tahansa voi ilmoittautua kursseille. Ilmoittautuneiden täytyy maksaa varausmaksu. Tarkemmat maksutiedot lähetetään ilmoittautumisen jälkeen. Ilmoittautunut saa halutessaan laskun.
 
 ### Sovelluksen toiminnot
 1. Kirjautuminen

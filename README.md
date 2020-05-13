@@ -10,8 +10,8 @@ Kurssikeskus järjestää maksullisia ohjelmoinnin kursseja. Jokaisen ohjelmoint
 1. Kirjautuminen
 2. Kurssin syöttö ja muokkaus
 3. Kurssitarjonnan katselu ja varauksen teko
-4. Varauslaskujen kirjoitus - niille jotka ovat sitä pyytäneet tai eivät ole viikon kuluessa vauksesta maksaneet varausmaksua. (valinnainen)
+4. Varauslaskujen lähetys pyytäneille (valinnainen)
 5. Ilmoittautuneiden luettelo
-6. Varauksen peruutus kurssikesuksen toimesta, jos maksua ei ole maksettu
+6. Varauksen peruutus kurssikeskuksen toimesta, jos maksua ei ole maksettu
 7. Varauksen peruutus asiakkaan toimesta
 8. Kurssin peruutus

@@ -1,7 +1,9 @@
 # Kurssikeskus Opinahjo
 Tsohan harjoitustyö
 
-### Aihekuvaus
+--------
+
+## Aihekuvaus
 Kurssikeskus järjestää maksullisia ohjelmoinnin kursseja.
 
 #### Toiminnot

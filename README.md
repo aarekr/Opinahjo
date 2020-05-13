@@ -1,2 +1,2 @@
-# Opinahjo
+# Kurssikeskus Opinahjo
 Tsohan harjoitustyö

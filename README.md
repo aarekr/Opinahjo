@@ -3,8 +3,8 @@ Tsohan harjoitustyö
 
 --------
 
-## Aihekuvaus
-Kurssikeskus järjestää maksullisia ohjelmoinnin kursseja.
+### Aihekuvaus
+Kurssikeskus järjestää maksullisia ohjelmoinnin kursseja. Jokaisen kielen kursseja on vuoden aikana useampia. Joidenkin kurssien osallistumismäärä on rajoitettu 20 opiskelijaan, toisilla rajoituksia ei ole.
 
 #### Toiminnot
 1. Kirjautuminen

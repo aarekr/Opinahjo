@@ -1,8 +1,9 @@
 {% extends "layout.html" %}
-  
+
 {% block body %}
+<p>Opettaja</p>
 <form method="POST" action="{{ url_for('kurssit_create') }}">
   <input type="text" name="name"/>
-  <input type="submit" value="Add a new course"/>
+  <input type="submit" value="Lisää kurssi opetustarjontaan"/>
 </form>
 {% endblock %}

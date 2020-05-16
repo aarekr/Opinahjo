@@ -2,6 +2,23 @@
 
 {% block body %}
   <p>
-    Hello world!
+    <h2 align="center">Tervetuloa Opinahjon kotisivuille</h2>
+    <center><i>Tarjoamme ohjelmoinnin kursseja</i></center>
+  <p>
+  <br />
+  <p>Opiskelija, valitse toiminto:
+      <ul>
+        <li><a href="{{ url_for('kurssit_index') }}">Näytä koko opetustarjonta</a></li>
+        <li><a>Näytä valitut kurssit</a></li>
+      </ul>
   </p>
+
+  <br /><br />
+
+  <p>Opettaja, valitse toiminto:
+      <ul>
+        <li><a href="{{ url_for('kurssit_form') }}">Lisää uusi kurssi opintosuunnitelmaan</a></li>
+      </ul>
+
+
 {% endblock %}

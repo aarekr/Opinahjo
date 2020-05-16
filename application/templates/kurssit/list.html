@@ -1,21 +1,31 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <table>
+  <table border="1"> <caption align="center">Kurssitarjontamme
     <tr>
-      <th>Kurssi</th>
-      <th>Käyty</th>
+      <th width="250">Kurssi</th>
+      <th width="120">Suoritettu</th>
+      <th width="210">Ilmoittautuminen</th>
+      <th width="150">Merkitse suoritetuksi</th>
     </tr>
     {% for kurssi in kurssit %}
     <tr>
       <td>{{ kurssi.name }}</td>
-      <td>{{ kurssi.done }}</td>
+      <td align="center">{{ kurssi.done }}</td>
+      <td>
+        <form method="POST" action="{{ url_for('kurssit_ilmoittaudu', kurssi_id=kurssi.id) }}">
+          <center><input type="submit" value="Ilmoittaudu kurssille"/></center>
+        </form>
+      </td>
       <td>
 	<form method="POST" action="{{ url_for('kurssit_set_done', kurssi_id=kurssi.id) }}">
-	  <input type="submit" value="Muuta status!"/>
+	  <center><input type="submit" value="Suoritettu!"/></center>
 	</form>
       </td>
     </tr>
     {% endfor %}
   </table>
+
+  <p>Palaa etusivulle</p>
+
 {% endblock %}

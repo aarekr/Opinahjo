@@ -2,19 +2,18 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Opinahjo</title>
+    <title>Kurssikeskus Opinahjo</title>
   </head>
 
   <body>
-      <ul>
-	<li><a href="{{ url_for('kurssit_index') }}">Listaa kurssit</a></li>
-	<li><a href="{{ url_for('kurssit_form') }}">Lisää kurssi</a></li>
-      </ul>
 
     {% block body %}
       <p>
         Content.
       </p>
     {% endblock %}
+
+
+
   </body>
 </html>

@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <table>
+    <tr>
+      <th>Kurssi</th>
+      <th>Käyty</th>
+    </tr>
+    {% for kurssi in kurssit %}
+    <tr>
+      <td>{{ kurssi.name }}</td>
+      <td>{{ kurssi.done }}</td>
+      <td>
+	<form method="POST" action="{{ url_for('kurssit_set_done', kurssi_id=kurssi.id) }}">
+	  <input type="submit" value="Muuta status!"/>
+	</form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

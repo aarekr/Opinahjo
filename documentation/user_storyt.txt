@@ -1,0 +1,14 @@
+STUDENT
+
+As a student, I want like to list all courses offered by the school, so that I can choose the ones I want to study.
+
+As a student, I want to list all courses I have taken and passed so far.
+
+As a student, I want to list all courses I am currently taking.
+
+
+TEACHER
+
+As a teacher, I want to list the courses I am currently teaching.
+
+As a teacher, I want to list my students, so that I can review their work and give grades.

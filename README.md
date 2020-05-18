@@ -7,9 +7,9 @@ Tsohan harjoitustyö, alkukesä 2020
 
 Heroku: 
 
-Tietokantakaavio:
+[Tietokantakaavio](https://github.com/aarekr/Opinahjo/blob/master/Opinahjo%20tietokantakaavio.PNG)
 
-User storyt: https://github.com/aarekr/Opinahjo/blob/master/documentation/user_storyt.txt
+[User storyt](https://github.com/aarekr/Opinahjo/blob/master/documentation/user_storyt.txt)
 
 --------
 

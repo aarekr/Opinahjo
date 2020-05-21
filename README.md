@@ -5,11 +5,7 @@ Tsohan harjoitustyö, alkukesä 2020
 
 ### Linkit
 
-<<<<<<< HEAD
-Heroku: [Opinahjo](https://opinahjo-105a.herokuapp.com)
-=======
 Heroku: [Opinahjo](https://opinahjo-105a.herokuapp.com/)
->>>>>>> fc39c42694d35dc508964de0b9868bf0e3b01ce8
 
 [Tietokantakaavio](https://github.com/aarekr/Opinahjo/blob/master/Opinahjo%20tietokantakaavio.PNG)
 

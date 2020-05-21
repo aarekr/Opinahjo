@@ -3,7 +3,24 @@
 {% block body %}
 <p>Opettaja</p>
 <form method="POST" action="{{ url_for('kurssit_create') }}">
-  <input type="text" name="name"/>
-  <input type="submit" value="Lisää kurssi opetustarjontaan"/>
+  <table>
+    <tr>
+      <td>{{ form.name.label }}</td>
+      <td>{{ form.name }}</td>
+      <td>
+        <ul>
+          {% for error in form.name.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      <td>
+    </tr>
+    <tr>
+      <td>{{ form.done.label }}</td>
+      <td>{{ form.done }}</td>
+    </tr>
+    <tr>
+      <td colspan="3"><input type="submit" value="Lisää kurssi opetustarjontaan"/></td>
+    </tr>
 </form>
 {% endblock %}

@@ -1,6 +1,8 @@
-from application import app, db
 from flask import redirect, render_template, request, url_for
+
+from application import app, db
 from application.kurssit.models import Kurssi
+from application.kurssit.forms import CourseForm
 
 @app.route("/kurssit", methods=["GET"])
 def kurssit_index():
@@ -8,7 +10,7 @@ def kurssit_index():
 
 @app.route("/kurssit/lisaauusikurssi/")
 def kurssit_form():
-    return render_template("kurssit/lisaauusikurssi.html")
+    return render_template("kurssit/lisaauusikurssi.html", form = CourseForm())
 
 @app.route("/kurssit/<kurssi_id>/", methods=["POST"])
 def kurssit_set_done(kurssi_id):
@@ -26,7 +28,11 @@ def kurssit_ilmoittaudu(kurssi_id):
 
 @app.route("/kurssit/", methods=["POST"])
 def kurssit_create():
-    k = Kurssi(request.form.get("name"))
+    form = CourseForm(request.form)
+    if not form.validate():
+        return render_template("kurssit/lisaauusikurssi.html", form = form)
+    k = Kurssi(form.name.data)
+    k.done = form.done.data
     db.session().add(k)
     db.session().commit()
     return redirect(url_for("kurssit_index"))

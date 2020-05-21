@@ -1,11 +1,12 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <table border="1"> <caption align="center">Kurssitarjontamme
+  <h3>Opetusohjelma</h3>
+  <table border="1">
     <tr>
-      <th width="250">Kurssi</th>
-      <th width="120">Suoritettu</th>
-      <th width="150">Merkitse suoritetuksi</th>
+      <center><th width="250">Kurssi</th><center>
+      <center><th width="120">Suoritettu</th><center>
+      <center><th width="150">Merkitse suoritetuksi</th><center>
     </tr>
     {% for kurssi in kurssit %}
     <tr>

@@ -18,7 +18,7 @@ class User(UserMixin, db.Model):
 
 #    kurssit = db.relationship("Kurssi", backref='account', lazy=True)
 
-    def __init__(self, name):
+    def __init__(self, name, username, password):
         self.name = name
         self.username = username
         self.password = password

@@ -2,8 +2,8 @@
 
 {% block body %}
 
-<!-- New User on Miguelin materiaalista -->
-<p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
+<p>Uusi käyttäjä? <a href="{{ url_for('kayttajan_rekisterointi') }}">Rekisteröidy tästä!</a></p>
+<hr>
 
 {{ error }}
 <form method="POST" action="{{ url_for('auth_login') }}">
@@ -17,7 +17,8 @@
       <td>{{ form.password }}</td>
     </tr>
     <tr>
-      <td colspan="2"><input type="submit" value="Login"/></td>
+      <td></td>
+      <td colspan="2"><input type="submit" value="Kirjaudu sisään"/></td>
     </tr>
 </form>
 {% endblock %}

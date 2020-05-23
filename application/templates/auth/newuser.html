@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+
+Luo käyttäjätili syöttämällä pyydetyt tiedot
+
+<form method="POST" action="{{ url_for('luo_kayttaja') }}">
+  <table>
+    <tr>
+      <td>Käyttäjätunnus </td>
+      <td><input type="text" name="name"/></td><br />
+    </tr>
+    <tr>
+      <td>Salasana </td>
+      <td><input type="password" name="salasana"/></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="submit" value="Luo käyttäjätili"/></td>
+    </tr>
+  </table>
+</form>
+
+
+{% endblock %}

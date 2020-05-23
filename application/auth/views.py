@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for
 from flask_login import login_user, logout_user, current_user
 
-from application import app
+from application import app, db
 from application.auth.models import User
 from application.auth.forms import LoginForm
 
@@ -29,4 +29,20 @@ def auth_login():
 @app.route("/auth/logout")
 def auth_logout():
     logout_user()
+    return redirect(url_for("index"))
+
+
+# uuden käyttäjätilin rekisteröinti
+@app.route("/auth/newuser")
+def kayttajan_rekisterointi():
+    return render_template("auth/newuser.html")
+
+@app.route("/auth/", methods=["POST"])
+def luo_kayttaja():
+    print(request.form.get("name")) # printtaa nimen logiin
+    nimi = request.form.get("name") # nimi = käyttäjätunnus
+    k = User(nimi, nimi, request.form.get("salasana"))
+    db.session().add(k)
+    db.session().commit()
+
     return redirect(url_for("index"))

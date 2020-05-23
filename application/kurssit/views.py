@@ -15,32 +15,15 @@ from application.forms import RegistrationForm # Miguelin materiaali
 def kurssit_index():
     return render_template("kurssit/list.html", kurssit = Kurssi.query.all())
 
-#@app.route("/kurssit/<kurssi_id>/", methods=["POST"])
-#@login_required
-#def kurssit_set_done(kurssi_id):
-#    k = Kurssi.query.get(kurssi_id)
-#    k.done = True
-#    k.varattu = True
-#    k.enrolled = True
-#    db.session().commit()
-#    return redirect(url_for("kurssit_index"))
-
-# kurssipaikan varaaminen, sallittu vain opiskelijalle
-#@app.route("/kurssit/<kurssi_id>/", methods=["POST"])
-#@login_required
-#def kurssit_enroll(kurssi_id): # ei toimi
-#    k = Kurssi.query.get(kurssi_id)
-#    k.enrolled = True
-#    db.session().commit()
-#    return redirect(url_for("kurssit_index"))
-
 # näyttää kurssinlisäyslomakkeen, sallittu vain opettajille
 @app.route("/kurssit/lisaauusikurssi/")
-#@login_required
+@login_required
 def kurssit_form():
     return render_template("kurssit/lisaauusikurssi.html", form = CourseForm())
 
+# opiskelija varaa kurssipaikan
 @app.route("/kurssit/<kurssi_id>/", methods=["POST"])
+@login_required
 def kurssit_enroll(kurssi_id):
     k = Kurssi.query.get(kurssi_id)
     k.enrolled = True
@@ -49,16 +32,14 @@ def kurssit_enroll(kurssi_id):
 
 # lisätään kurssi tietokantaan, sallittu vain opettajille
 @app.route("/kurssit/", methods=["POST"])
-#@login_required
+@login_required
 def kurssit_create():
     form = CourseForm(request.form)
     if not form.validate():
         return render_template("kurssit/lisaauusikurssi.html", form = form)
 
     k = Kurssi(form.name.data)
-    #k.enrollet = False # tämä saattaa riittää
-#    k.enrolled = form.enrolled.data # mun lisäys
-#    k.done = form.done.data
+
 #    k.account_id = current_user.id
 
     db.session().add(k)

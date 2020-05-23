@@ -6,19 +6,23 @@
     <tr>
       <center><th width="250">Kurssi</th><center>
       <center><th width="120">Suoritettu</th><center>
+      <center><th width="130">Paikka varattu</th><center>
+      <center><th width="170">Ilmoittautuminen</th><center>
       <center><th width="150">Merkitse suoritetuksi</th><center>
     </tr>
     {% for kurssi in kurssit %}
     <tr>
       <td>{{ kurssi.name }}</td>
-      <td align="center">{{ kurssi.done }}</td>
+      <td align="center">Done tässä</td>
+      <td align="center">{{ kurssi.enrolled }}</td>
       <td>
-	<form method="POST" action="{{ url_for('kurssit_set_done', kurssi_id=kurssi.id) }}">
-	  <center><input type="submit" value="Suoritettu!"/></center>
-	</form>
+        <form method="POST" action="{{ url_for('kurssit_enroll', kurssi_id=kurssi.id) }}">
+          <center><input type="submit" value="Varaa paikka"/></center>
+        </form>
+      </td>
+      <td>Done -nappi tässä
       </td>
     </tr>
     {% endfor %}
   </table>
-
 {% endblock %}

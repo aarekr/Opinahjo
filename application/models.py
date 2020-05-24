@@ -1,6 +1,6 @@
 from application import db
 
-class Base(db.Model):
+class Base(db.Model): # Kurssi, User
 
     __abstract__ = True
 

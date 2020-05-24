@@ -1,7 +1,7 @@
 from application import db
 from application.models import Base
 
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash # Mig
 from flask_login import UserMixin
 
 class User(UserMixin, Base):
@@ -32,8 +32,8 @@ class User(UserMixin, Base):
     def is_authenticated(self):
         return True
 
-    def set_password(self, password):
+    def set_password(self, password): # Mig
         self.password_hash = generate_password_hash(password)
 
-    def check_password(self, password):
+    def check_password(self, password): # Mig
         return check_password_hash(self.password_hash, password)

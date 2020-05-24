@@ -45,4 +45,8 @@ def luo_kayttaja():
     db.session().add(k)
     db.session().commit()
 
-    return redirect(url_for("index"))
+    return redirect(url_for("tili_luotu")) # tähän linkki kirjautumiseen
+
+@app.route("/auth/accountcreated")
+def tili_luotu():
+    return render_template("auth/accountcreated.html")

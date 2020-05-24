@@ -2,10 +2,11 @@
 
 {% block body %}
 
-<p>Uusi käyttäjä? <a href="{{ url_for('kayttajan_rekisterointi') }}">Rekisteröidy tästä!</a></p>
+<p>Uusi käyttäjä? <a href="{{ url_for('user_registration') }}">Rekisteröidy tästä!</a></p>
 <hr>
+<br />
 
-{{ error }}
+<p><span style="color: red;">{{ error }}</span></p>
 <form method="POST" action="{{ url_for('auth_login') }}">
   <table>
     <tr>
@@ -18,7 +19,7 @@
     </tr>
     <tr>
       <td></td>
-      <td colspan="2"><input type="submit" value="Kirjaudu sisään"/></td>
+      <td>{{ form.submit() }}</td>
     </tr>
 </form>
 {% endblock %}

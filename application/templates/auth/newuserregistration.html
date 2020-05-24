@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+
+Luo käyttäjätili syöttämällä pyydetyt tiedot
+
+<form method="POST" action="{{ url_for('create_user') }}">
+  <table>
+    <tr>
+      <td>{{ form.username.label }}</td>
+      <td>{{ form.username }}</td>
+      <td>{% for error in form.username.errors %}
+          <span style="color: red;">{{ error }}</span>
+          {% endfor %}
+      </td>
+      <br />
+    </tr>
+    <tr>
+      <td>{{ form.password.label }}</td>
+      <td>{{ form.password }}</td>
+      <td>{% for error in form.password.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+      </td>
+    </tr>
+    <tr>  <!-- salasanan tarkistus: password oltava sama kuin password2 -->
+      <td>{{ form.password2.label }}</td>
+      <td>{{ form.password2 }}</td>
+      <td>{% for error in form.password2.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>{{ form.submit }}</td>
+    </tr>
+  </table>
+</form>
+
+{% endblock %}
+

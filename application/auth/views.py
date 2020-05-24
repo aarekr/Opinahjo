@@ -4,12 +4,13 @@ from flask_login import login_user, logout_user, current_user
 from application import app, db
 from application.auth.models import User
 from application.auth.forms import LoginForm
+from application.auth.forms import RegistrationForm
 
 @app.route("/auth/login", methods = ["GET", "POST"])
 def auth_login():
     # jos käyttäjä on jo kirjautunut => ohjataan etusivulle
-    #if current_user.is_authenticated:
-    #    return redirect(url_for('index'))
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
 
     if request.method == "GET":
         return render_template("auth/loginform.html", form = LoginForm())
@@ -33,20 +34,24 @@ def auth_logout():
 
 
 # uuden käyttäjätilin rekisteröinti
-@app.route("/auth/newuser")
-def kayttajan_rekisterointi():
-    return render_template("auth/newuser.html")
+@app.route("/auth/register")
+def user_registration():
+    return render_template("auth/newuserregistration.html", form = RegistrationForm())
 
 @app.route("/auth/", methods=["POST"])
-def luo_kayttaja():
-    print(request.form.get("name")) # printtaa nimen logiin
-    nimi = request.form.get("name") # nimi = käyttäjätunnus
-    k = User(nimi, nimi, request.form.get("salasana"))
+def create_user():
+    form = RegistrationForm(request.form)
+    if not form.validate():
+        return render_template("auth/newuserregistration.html", form = form)
+    print(request.form.get("username")) # printtaa nimen logiin
+    nimi = request.form.get("username") # nimi = käyttäjätunnus
+    k = User(nimi, nimi, request.form.get("password"))
     db.session().add(k)
     db.session().commit()
 
-    return redirect(url_for("tili_luotu")) # tähän linkki kirjautumiseen
+    return redirect(url_for("tili_luotu"))
 
+# vahvistetaan, että käyttäjätili on luotu
 @app.route("/auth/accountcreated")
 def tili_luotu():
     return render_template("auth/accountcreated.html")

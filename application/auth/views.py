@@ -55,3 +55,15 @@ def create_user():
 @app.route("/auth/accountcreated")
 def tili_luotu():
     return render_template("auth/accountcreated.html")
+
+# käyttäjän henk.koht sivu
+#@app.route('/user/<usernimi>')
+#@login_required
+#def user(usernimi):
+#    user = User.query.filter_by(username=usernimi).first_or_404()
+#    posts = [
+#        {'author': user, 'body': 'Test post 1'},
+#        {'author': user, 'body': 'Test post 2'}
+#    ]
+#    return render_template('user.html', user=user) #, posts=posts)
+

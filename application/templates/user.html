@@ -1,18 +1,32 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    <h1>User: {{ user.username }}</h1>
+    <h1>Hei, {{ user.username }}</h1>
+
+    <!-- profiili -->
+    {% if user.student %}
+    <h6>(Opiskelija)</h6>
+    {% elif user.teacher %}
+    <h6>(Opettaja)</h6>
+    {% endif %}
     <hr>
-    <h6>Ilmoittautumiset: </h6>
-    <!-- listaa tähän kurssit, joille ilmoittautunut mutta ei suoritettu -->
+
+    {% if user.student %}
+      <h6>Ilmoittautumiset: </h6>
+      <!-- listaa tähän kurssit, joille ilmoittautunut mutta ei suoritettu -->
+      {% elif user.teacher %}
+      <h6>Opetus: </h6>
+    {% endif %}
     <hr>
-    <h6>Suoritetut kurssit: </h6>
-    <!-- listaa suoritetut kurssit -->
+
+    {% if user.student %}
+      <h6>Suoritetut kurssit: </h6>
+      <!-- listaa suoritetut kurssit -->
     <hr>
+    {% endif %}
+
     <h6>Postaukset: </h6>
     <!-- käyttäjän postaukset -->
     <hr>
-    <p>templates/ user html sivu</p>
 
 {% endblock %}
-

@@ -45,7 +45,9 @@ def create_user():
         return render_template("auth/newuserregistration.html", form = form)
     print(request.form.get("username")) # printtaa nimen logiin
     nimi = request.form.get("username") # nimi = käyttäjätunnus
-    k = User(nimi, nimi, request.form.get("password"))
+    student = True
+    teacher = False
+    k = User(nimi, nimi, request.form.get("password"), student, teacher)
     db.session().add(k)
     db.session().commit()
 
@@ -55,15 +57,3 @@ def create_user():
 @app.route("/auth/accountcreated")
 def tili_luotu():
     return render_template("auth/accountcreated.html")
-
-# käyttäjän henk.koht sivu
-#@app.route('/user/<usernimi>')
-#@login_required
-#def user(usernimi):
-#    user = User.query.filter_by(username=usernimi).first_or_404()
-#    posts = [
-#        {'author': user, 'body': 'Test post 1'},
-#        {'author': user, 'body': 'Test post 2'}
-#    ]
-#    return render_template('user.html', user=user) #, posts=posts)
-

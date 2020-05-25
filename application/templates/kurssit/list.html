@@ -12,7 +12,7 @@
     {% for kurssi in kurssit %}
     <tr>
       <td>{{ kurssi.name }}</td>
-      <td align="center">Done status</td>
+      <td align="center">{{ kurssi.completed }}</td>
       <td align="center">{{ kurssi.enrolled }}</td>
       <td>
         <form method="POST" action="{{ url_for('kurssit_enroll', kurssi_id=kurssi.id) }}">

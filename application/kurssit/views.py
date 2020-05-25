@@ -32,6 +32,9 @@ def kurssit_enroll(kurssi_id):
 @app.route("/kurssit/", methods=["POST"])
 @login_required
 def kurssit_create():
+    if not current_user.teacher: # jos ei-opettaja lisäämässä uutta kurssia
+        return redirect(url_for("kurssit_index"))
+
     form = CourseForm(request.form)
     if not form.validate():
         return render_template("kurssit/lisaauusikurssi.html", form = form)

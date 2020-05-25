@@ -1,25 +1,29 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<p>Opettaja</p>
+
+{% if current_user.teacher %}
+<p>Lisää uusi kurssi syöttämällä pyydetyt tiedot</p>
 <form method="POST" action="{{ url_for('kurssit_create') }}">
   <table>
     <tr>
       <td>{{ form.name.label }}</td>
       <td>{{ form.name }}</td>
       <td>
-        <ul> <!-- kurssin nimeen liittyvät virheet -->
+        <ul> <!-- uuden kurssin nimeen liittyvät virheet -->
           {% for error in form.name.errors %}
           <li>{{ error }}</li>
           {% endfor %}
         </ul>
       <td>
     </tr>
-    <!-- tässä oli materiaalissa done -osuus -->
     <tr>
-      <td colspan="2">
-        <input type="submit" value="Lisää kurssi opetusohjelmaan"/>
-      </td>
+      <td></td>
+      <td>{{ form.submit() }}</td>
     </tr>
 </form>
+{% else %}
+Sinulla ei ole valtuuksia lisätä kursseja opetusohjelmaan!
+{% endif %}
+
 {% endblock %}

@@ -21,14 +21,22 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('kurssit_index') }}">Opetusohjelma</a>
           </li>
-          <li class="nav-item">
-            {% if current_user.is_authenticated %}
+          <li class="nav-item"> <!-- opiskelijan näkymä -->
+            {% if current_user.is_authenticated and current_user.student %}
             <a class="nav-link" href="{{ url_for('user', usernimi=current_user.username) }}">Minun kurssit</a>
             {% endif %}
           </li>
+          <li class="nav-item"> <!-- opettajan näkymä -->
+            {% if current_user.is_authenticated and current_user.teacher %}
+            <a class="nav-link" href="{{ url_for('user', usernimi=current_user.username) }}">Minun opetus</a>
+            {% endif %}
+          </li>
+
           <li class="nav-item">
             <!-- jos käyttäjä on opettaja, tämä kohta näytetään -->
+            {% if current_user.teacher %}
             <a class="nav-link" href="{{ url_for('kurssit_form') }}">Lisää kurssi opetusohjelmaan</a>
+            {% endif %}
             <!-- jos loppuu -->
           </li>
         </ul>

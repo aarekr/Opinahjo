@@ -7,8 +7,6 @@ from application.kurssit.forms import CourseForm
 
 from application.auth.models import User
 
-#from application.forms import RegistrationForm # Miguelin materiaali
-
 
 # listaa kaikki kurssit
 @app.route("/kurssit", methods=["GET"])

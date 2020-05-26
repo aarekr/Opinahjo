@@ -43,7 +43,6 @@ def create_user():
     form = RegistrationForm(request.form)
     if not form.validate():
         return render_template("auth/newuserregistration.html", form = form)
-    print(request.form.get("username")) # printtaa nimen logiin
     nimi = request.form.get("username") # nimi = käyttäjätunnus
     student = True
     teacher = False

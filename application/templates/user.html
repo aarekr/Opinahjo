@@ -11,9 +11,64 @@
     {% endif %}
     <hr>
 
+
+<!-- ei toimi -->
+  {% if current_user.teacher %}
+    <b>Minun opetus: </b> <br />
+  {% endif %}
+väli
+  {% for kurssi in kurssit %}
+hei
+      <i>{{ kurssi.name }}</i> <br />
+  {% endfor %}
+
+<hr>
+  {% if current_user.teacher %}
+    <b>Minun opetus: </b> <br />
+  {% endif %}
+  {% for kurssi in kurssit %}
+      <i>{{ kurssi.name }}</i> <br />
+  {% endfor %}
+
+
+
+
+
+
+
+
+
+<br /><br />
+
     {% if user.student %}
       <h6>Ilmoittautumiset: </h6>
       <!-- listaa tähän kurssit, joille ilmoittautunut mutta ei suoritettu -->
+  <table border="1">
+    <tr>
+      <center><th width="250">Kurssi</th><center>
+      <center><th width="120">Suoritettu</th><center>
+      <center><th width="100">Paikka varattu</th><center>
+      <center><th width="170">Merkkaa suoritetuksi</th><center>
+    </tr>
+    {% for kurssi in kurssit %}
+    <tr>
+      <td>{{ kurssi.name }}</td>
+      <td align="center">{{ kurssi.completed }}</td>
+      <td align="center">{{ kurssi.enrolled }}</td>
+      <td>
+        <form method="POST" action="{{ url_for('kurssit_set_done', kurssi_id=kurssi.id) }}">
+          <center><input type="submit" value="Suoritettu"/></center>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+
+
+
+
+
       {% elif user.teacher %}
       <h6>Opetus: </h6>
     {% endif %}

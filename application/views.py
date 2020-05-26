@@ -3,6 +3,9 @@ from application import app
 from application.auth.models import User
 from flask_login import login_required, current_user
 
+from application import app, db # näkyykö kurssit user.html ssä?
+from application.kurssit.models import Kurssi
+
 
 # etusivu
 @app.route("/")

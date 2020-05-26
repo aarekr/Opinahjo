@@ -41,7 +41,7 @@ def kurssit_create():
 
     k = Kurssi(form.name.data)
 
-#    k.account_id = current_user.id
+    k.account_id = current_user.id
 
     db.session().add(k)
     db.session().commit()

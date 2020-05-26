@@ -5,7 +5,6 @@ class CourseForm(FlaskForm):
     name = StringField("Kurssin nimi", [validators.Length(min=2)])
     enrolled = BooleanField("Paikka varattu")
     submit = SubmitField('Lisää opetusohjelmaan')
-#    done = BooleanField("Suoritettu") # tämä ei saisi olla opettaja-näkymässä
 
     class Meta:
         csrf = False

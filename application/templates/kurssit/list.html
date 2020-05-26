@@ -5,21 +5,38 @@
   <table border="1">
     <tr>
       <center><th width="250">Kurssi</th><center>
-      <center><th width="120">Suoritettu</th><center>
+      <center><th width="130">Opettaja</th><center>
+      <!-- opettajalle ei näytetä paikanvarausta ja ilmoittautumista -->
+      {% if not current_user.teacher %}
       <center><th width="100">Paikka varattu</th><center>
       <center><th width="170">Ilmoittautuminen</th><center>
+      {% endif %}
     </tr>
     {% for kurssi in kurssit %}
     <tr>
       <td>{{ kurssi.name }}</td>
-      <td align="center">{{ kurssi.completed }}</td>
-      <td align="center">{{ kurssi.enrolled }}</td>
+      <td align="center">{% if kurssi.account_id==1 %}Opettaja 1{% else %}Opettaja 2{% endif %}
+      </td>
+      <!-- opettajalle ei näytetä ilmoittautumista -->
+      {% if not current_user.teacher %}
+      <td align="center">{{ kurssi.enrolled }} ja {{ current_user.enrolled }}</td>
       <td>
         <form method="POST" action="{{ url_for('kurssit_enroll', kurssi_id=kurssi.id) }}">
           <center><input type="submit" value="Varaa paikka"/></center>
         </form>
       </td>
+      {% endif %}
     </tr>
     {% endfor %}
   </table>
+<hr>
+  {% if current_user.teacher %}
+    <b>Minun opetus: </b> <br />
+  {% endif %}
+  {% for kurssi in kurssit %}
+    {% if kurssi.account_id==current_user.id %}
+      <i>{{ kurssi.name }}</i> <br />
+    {% endif %}
+  {% endfor %}
+
 {% endblock %}

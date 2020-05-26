@@ -1,6 +1,7 @@
 from flask import Flask
 app = Flask(__name__)
-#login = LoginManager(app) # Miguelin materiaali ?
+
+from flask_login import login_user, logout_user, current_user # tämä syynä?
 
 from flask_sqlalchemy import SQLAlchemy
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///kurssit.db"
@@ -9,7 +10,6 @@ app.config["SQLALCHEMY_ECHO"] = True
 db = SQLAlchemy(app)
 
 from application import views
-#from application import forms  # Registration form importattava
 
 from application.kurssit import models
 from application.kurssit import views

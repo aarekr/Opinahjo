@@ -1,5 +1,7 @@
 from application import db
 from application.models import Base
+from application.models import enrollments
+from application.kurssit.models import Kurssi
 
 class User(Base):
 
@@ -11,7 +13,7 @@ class User(Base):
     student = db.Column(db.Boolean, nullable=False)
     teacher = db.Column(db.Boolean, nullable=False)
 
-    kurssit = db.relationship("Kurssi", backref='account', lazy=True)
+    enrollments = db.relationship('Kurssi', secondary=enrollments, lazy='subquery', backref=db.backref('users', lazy=True))
 
     def __init__(self, name, username, password, student, teacher):
         self.name = name

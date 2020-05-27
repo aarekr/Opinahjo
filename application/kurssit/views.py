@@ -25,6 +25,7 @@ def kurssit_form():
 def kurssit_enroll(kurssi_id):
     k = Kurssi.query.get(kurssi_id)
     k.enrolled = True
+#    k.account_id = current_user.id # opiskelija-kurssi viite
     db.session().commit()
     return redirect(url_for("kurssit_index"))
 

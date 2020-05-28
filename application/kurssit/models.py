@@ -1,7 +1,6 @@
 from application import db
 from application.models import Base
 from application.models import enrollments
-#from application.auth.models import Account
 from sqlalchemy.sql import text
 
 class Kurssi(Base):

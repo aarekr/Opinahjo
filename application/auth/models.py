@@ -14,7 +14,7 @@ class User(Base):
     student = db.Column(db.Boolean, nullable=False)
     teacher = db.Column(db.Boolean, nullable=False)
 
-    enrollments = db.relationship('Kurssi', secondary=enrollments, lazy='subquery', backref=db.backref('users', lazy=True))
+    enrollments = db.relationship('Kurssi', secondary=enrollments, lazy='subquery', backref=db.backref('users', lazy=True)) # kurssit eikä users ???
 
     def __init__(self, name, username, password, student, teacher):
         self.name = name
@@ -65,4 +65,23 @@ class User(Base):
         response = []
         for row in res:
             response.append({"course_count":row[0]})
+        return response
+
+    @staticmethod
+    def school_teachers_total():
+        stmt = text("SELECT COUNT(Account.id) FROM Account WHERE Account.teacher = 1")
+        res = db.engine.execute(stmt)
+        response = []
+        for row in res:
+            response.append({"teacher_count":row[0]})
+        return response
+
+    @staticmethod
+    def courses_and_teachers():
+        stmt = text("SELECT Kurssi.name, Account.name FROM Kurssi, Account "
+                    "WHERE Kurssi.account_id = Account.id")
+        res = db.engine.execute(stmt)
+        response = []
+        for row in res:
+            response.append({"kurssi":row[0], "opettaja":row[1]})
         return response

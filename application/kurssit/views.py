@@ -11,7 +11,10 @@ from application.auth.models import User
 # listaa kaikki kurssit
 @app.route("/kurssit", methods=["GET"])
 def kurssit_index():
-    return render_template("kurssit/list.html", kurssit = Kurssi.query.all())
+    kurssit = Kurssi.query.all()
+    school_total_courses_offered = User.school_total_courses_offered()
+    return render_template("kurssit/list.html", kurssit = kurssit, 
+        school_total_courses_offered=school_total_courses_offered)
 
 # näyttää kurssinlisäyslomakkeen, sallittu vain opettajille
 @app.route("/kurssit/lisaauusikurssi/")

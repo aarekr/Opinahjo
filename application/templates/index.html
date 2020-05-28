@@ -5,26 +5,8 @@
     <h2 align="center">Tervetuloa Opinahjon kotisivuille</h2>
     <center><i>Tarjoamme ohjelmoinnin kursseja</i></center>
   <p><hr>
-  <br />
-  {% if not current_user.teacher %}
-  <p>Opiskelija, valitse toiminto:
-      <ul>
-        <li><a href="{{ url_for('auth_login') }}">Kirjaudu sisään / rekisteröidy käyttäjäksi</a></li>
-        <li><a href="{{ url_for('kurssit_index') }}">Näytä koko opetusohjelma</a></li>
-        <li><a href="{{ url_for('user', usernimi=current_user.username) }}">Näytä minun kurssit</a></li>
-      </ul>
-  </p>
-  {% endif %}
 
-  <br /><br />
-  {% if not current_user.student %}
-  <p>Opettaja, valitse toiminto:
-      <ul>
-        <li><a href="{{ url_for('auth_login') }}">Kirjaudu sisään</a></li>
-        <li><a href="{{ url_for('kurssit_form') }}">Lisää uusi kurssi opetusohjelmaan</a></li>
-        <li><a href="{{ url_for('user', usernimi=current_user.username) }}">Näytä minun opetus</a></li>
-      </ul>
-  </p>
-  {% endif %}
+TYHJÄ SIVU
+
 
 {% endblock %}

@@ -1,6 +1,8 @@
 from application import db
 from application.models import Base
 from application.models import enrollments
+#from application.auth.models import Account
+from sqlalchemy.sql import text
 
 class Kurssi(Base):
 
@@ -17,3 +19,14 @@ class Kurssi(Base):
         self.name = name
         self.enrolled = False
         self.completed = False
+
+    @staticmethod
+    def teacher_my_courses():
+        stmt = text("SELECT Kurssi.id, Kurssi.name FROM Kurssi WHERE Account.id = 1")
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"id":row[0], "name":row[1]})
+
+        return response

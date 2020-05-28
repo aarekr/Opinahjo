@@ -10,65 +10,39 @@
     <h6>(Opettaja)</h6>
     {% endif %}
     <hr>
-
-
-<!-- ei toimi -->
-  {% if current_user.teacher %}
-    <b>Minun opetus: </b> <br />
-  {% endif %}
-väli
-  {% for kurssi in kurssit %}
-hei
-      <i>{{ kurssi.name }}</i> <br />
+testi - OPETUS <br />
+{% if teacher_info is defined %}
+defined -
+{{ teacher_info }}
+<ul>
+  {% for user in teacher_info %}
+  <li>
+       {{user.id}} {{user.name}} -  opiskelija: {{user.student}}
+  </li>
   {% endfor %}
+</ul>
+{% endif %}
 
 <hr>
-  {% if current_user.teacher %}
-    <b>Minun opetus: </b> <br />
-  {% endif %}
-  {% for kurssi in kurssit %}
-      <i>{{ kurssi.name }}</i> <br />
-  {% endfor %}
+
+TEACHER TOTAL COURSES <br />
+{% if teacher_my_total_courses is defined %}
+  defined -
+  {{ teacher_my_total_courses }} <br />
+  <ul>
+    {% for kurssi in teacher_my_total_courses %}
+    <li>{{kurssi.name}}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+<hr>
 
 
 
 
-
-
-
-
-
-<br /><br />
 
     {% if user.student %}
-      <h6>Ilmoittautumiset: </h6>
-      <!-- listaa tähän kurssit, joille ilmoittautunut mutta ei suoritettu -->
-  <table border="1">
-    <tr>
-      <center><th width="250">Kurssi</th><center>
-      <center><th width="120">Suoritettu</th><center>
-      <center><th width="100">Paikka varattu</th><center>
-      <center><th width="170">Merkkaa suoritetuksi</th><center>
-    </tr>
-    {% for kurssi in kurssit %}
-    <tr>
-      <td>{{ kurssi.name }}</td>
-      <td align="center">{{ kurssi.completed }}</td>
-      <td align="center">{{ kurssi.enrolled }}</td>
-      <td>
-        <form method="POST" action="{{ url_for('kurssit_set_done', kurssi_id=kurssi.id) }}">
-          <center><input type="submit" value="Suoritettu"/></center>
-        </form>
-      </td>
-    </tr>
-    {% endfor %}
-  </table>
-
-
-
-
-
-
+      <h6>Minun kurssit</h6>
       {% elif user.teacher %}
       <h6>Opetus: </h6>
     {% endif %}
@@ -79,9 +53,5 @@ hei
       <!-- listaa suoritetut kurssit -->
     <hr>
     {% endif %}
-
-    <h6>Postaukset: </h6>
-    <!-- käyttäjän postaukset -->
-    <hr>
 
 {% endblock %}

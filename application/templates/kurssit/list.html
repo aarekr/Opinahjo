@@ -1,7 +1,15 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <h3>Opetusohjelma</h3>
+  <h3 align="center">Opetusohjelma</h3> <hr>
+
+  {% if school_total_courses_offered is defined %}
+    <b>Tarjoamme tällä hetkellä
+      {% for lkm in school_total_courses_offered %}
+        {{lkm.course_count}} kurssia.
+      {% endfor %} </b> <br /> <br />
+  {% endif %}
+
   <table border="1">
     <tr>
       <center><th width="250">Kurssi</th><center>
@@ -19,9 +27,9 @@
       </td>
       <!-- opettajalle ei näytetä ilmoittautumista -->
       {% if not current_user.teacher %}
-      <td align="center">{{ kurssi.enrolled }} ja {{ current_user.enrolled }}</td>
+      <td align="center">{{ kurssi.enrolled }}</td>
       <td>
-        <form method="POST" action="{{ url_for('kurssit_enroll', kurssi_id=kurssi.id) }}">
+        <form>
           <center><input type="submit" value="Varaa paikka"/></center>
         </form>
       </td>

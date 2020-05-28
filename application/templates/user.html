@@ -10,21 +10,44 @@
     <h6>(Opettaja)</h6>
     {% endif %}
     <hr>
-testi - OPETUS <br />
-{% if teacher_info is defined %}
-defined -
-{{ teacher_info }}
-<ul>
-  {% for user in teacher_info %}
-  <li>
-       {{user.id}} {{user.name}} -  opiskelija: {{user.student}}
-  </li>
-  {% endfor %}
-</ul>
+
+<!-- opiskelijalle näytetään kurssi-ilmoittautumiset -->
+{% if user.student %}
+  STUDENT MY COURSES <br />
+  {% if student_my_courses is defined %}
+  defined, raw data: {{student_my_courses}} <br/>
+  <b>Ilmoittautumiset</b>
+    <ul>
+      {% for kurssi in student_my_courses %}
+        {% if user.username == kurssi.student %}
+          <li>{{kurssi.kurssi}}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  <hr>
+  {% endif %}
 {% endif %}
 
-<hr>
 
+
+<!-- opettajan näkymä -->
+{% if user.teacher %}
+  {% if teacher_info is defined %}
+  defined, raw data: {{ teacher_info }} <br />
+  <b>Opiskelijalista</b> <br />
+  <ul>
+    {% for user in teacher_info %}
+      {% if user.student %}
+      <li>{{user.name}}</li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+  {% endif %}
+<hr>
+{% endif %}
+
+
+{% if user.teacher %}
 TEACHER TOTAL COURSES <br />
 {% if teacher_my_total_courses is defined %}
   defined -
@@ -36,22 +59,6 @@ TEACHER TOTAL COURSES <br />
   </ul>
 {% endif %}
 <hr>
-
-
-
-
-
-    {% if user.student %}
-      <h6>Minun kurssit</h6>
-      {% elif user.teacher %}
-      <h6>Opetus: </h6>
-    {% endif %}
-    <hr>
-
-    {% if user.student %}
-      <h6>Suoritetut kurssit: </h6>
-      <!-- listaa suoritetut kurssit -->
-    <hr>
-    {% endif %}
+{% endif %}
 
 {% endblock %}

@@ -37,7 +37,7 @@
       </td>
       <!-- opettajalle ei näytetä ilmoittautumista -->
       {% if not current_user.teacher %}
-      <td align="center">enrolled</td>
+      <td align="center">...</td>
       <td>
         <form>
           <center><input type="submit" value="Varaa paikka"/></center>
@@ -58,3 +58,4 @@
   {% endfor %}
 
 {% endblock %}
+

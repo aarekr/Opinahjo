@@ -37,7 +37,8 @@ class User(Base):
 
     @staticmethod
     def teacher_info():
-        stmt = text("SELECT Account.id, Account.name, Account.student FROM Account")
+        stmt = text("SELECT Account.id, Account.name, Account.student "
+                    "FROM Account")
         res = db.engine.execute(stmt)
 
         response = []
@@ -48,7 +49,8 @@ class User(Base):
 
     @staticmethod
     def teacher_my_total_courses():
-        stmt = text("SELECT Kurssi.id, Kurssi.name FROM Kurssi "
+        stmt = text("SELECT Kurssi.id, Kurssi.name "
+                    "FROM Kurssi "
                     "LEFT JOIN Account ON Account.id = Account.id ")
         res = db.engine.execute(stmt)
 
@@ -58,7 +60,7 @@ class User(Base):
 
         return response
 
-    @staticmethod
+    @staticmethod # kurssien lkm
     def school_total_courses_offered():
         stmt = text("SELECT COUNT(Kurssi.id) FROM Kurssi")
         res = db.engine.execute(stmt)
@@ -67,7 +69,7 @@ class User(Base):
             response.append({"course_count":row[0]})
         return response
 
-    @staticmethod
+    @staticmethod # opettajien lkm
     def school_teachers_total():
         stmt = text("SELECT COUNT(Account.id) FROM Account WHERE Account.teacher = 1")
         res = db.engine.execute(stmt)
@@ -76,12 +78,26 @@ class User(Base):
             response.append({"teacher_count":row[0]})
         return response
 
-    @staticmethod
+    @staticmethod # yhteenveto: kurssit ja opettajat
     def courses_and_teachers():
-        stmt = text("SELECT Kurssi.name, Account.name FROM Kurssi, Account "
+        stmt = text("SELECT Kurssi.name, Account.name "
+                    "FROM Kurssi, Account "
                     "WHERE Kurssi.account_id = Account.id")
         res = db.engine.execute(stmt)
         response = []
         for row in res:
             response.append({"kurssi":row[0], "opettaja":row[1]})
+        return response
+
+    @staticmethod # opiskelijan kurssi-ilmoittautumiset
+    def student_my_courses():
+        stmt = text("SELECT Kurssi.name, Account.name "
+                    "FROM Account, Kurssi, Enrollments "
+                    "WHERE Account.id = Enrollments.account_id "
+                    "AND Kurssi.id = Enrollments.kurssi_id "
+                    "ORDER BY Kurssi.name")
+        res = db.engine.execute(stmt)
+        response = []
+        for row in res:
+            response.append({"kurssi":row[0], "student":row[1]})
         return response

@@ -10,7 +10,7 @@ from application.auth.forms import RegistrationForm
 def auth_login():
     # jos käyttäjä on jo kirjautunut => ohjataan etusivulle
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('kurssit_index'))
 
     if request.method == "GET":
         return render_template("auth/loginform.html", form = LoginForm())
@@ -24,13 +24,13 @@ def auth_login():
                error = "Käyttäjätunnusta tai salasanaa ei löytynyt")
 
     login_user(user)
-    return redirect(url_for("index"))
+    return redirect(url_for("kurssit_index"))
 
 # uloskirjautuminen
 @app.route("/auth/logout")
 def auth_logout():
     logout_user()
-    return redirect(url_for("index"))
+    return redirect(url_for("kurssit_index"))
 
 
 # uuden käyttäjätilin rekisteröinti

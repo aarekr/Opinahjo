@@ -1,7 +1,7 @@
 from flask import Flask
 app = Flask(__name__)
 
-from flask_login import login_user, logout_user, current_user # tämä syynä?
+#from flask_login import login_user, logout_user, current_user # tämä syynä?
 
 from flask_sqlalchemy import SQLAlchemy
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///kurssit.db"

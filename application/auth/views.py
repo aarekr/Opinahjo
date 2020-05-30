@@ -33,11 +33,12 @@ def auth_logout():
     return redirect(url_for("kurssit_index"))
 
 
-# uuden käyttäjätilin rekisteröinti
+# uuden opiskelijatilin rekisteröinti
 @app.route("/auth/register")
 def user_registration():
     return render_template("auth/newuserregistration.html", form = RegistrationForm())
 
+# uuden opiskelijan luonti
 @app.route("/auth/", methods=["POST"])
 def create_user():
     form = RegistrationForm(request.form)
@@ -48,6 +49,27 @@ def create_user():
     teacher = False
     k = User(nimi, nimi, request.form.get("password"), student, teacher)
     db.session().add(k)
+    db.session().commit()
+
+    return redirect(url_for("tili_luotu"))
+
+
+# uuden opettajatilin rekisteröinti
+@app.route("/opettaja")
+def opettaja_registration():
+    return render_template("auth/uudenopettajanrekisterointi.html", form = RegistrationForm())
+
+# uuden opettajan luonti
+@app.route("/opettaja", methods=["POST"])
+def luo_opettaja():
+    form = RegistrationForm(request.form)
+    if not form.validate():
+        return render_template("auth/uudenopettajanrekisterointi.html", form = form)
+    nimi = request.form.get("username") # nimi = käyttäjätunnus
+    student = False
+    teacher = True
+    t = User(nimi, nimi, request.form.get("password"), student, teacher)
+    db.session().add(t)
     db.session().commit()
 
     return redirect(url_for("tili_luotu"))

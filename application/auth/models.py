@@ -79,7 +79,7 @@ class User(Base):
         return response
 
     @staticmethod # yhteenveto: kurssit ja opettajat
-    def courses_and_teachers():
+    def courses_and_teachers(): # Opetusohjelma, list.html
         stmt = text("SELECT Kurssi.name, Account.name "
                     "FROM Kurssi, Account "
                     "WHERE Kurssi.account_id = Account.id")

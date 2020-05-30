@@ -3,7 +3,7 @@ from wtforms import PasswordField, StringField, BooleanField, SubmitField, valid
 from wtforms.validators import ValidationError, DataRequired, EqualTo
 from application.auth.models import User
 
-# kirjautumislomake
+# userin kirjautumislomake
 class LoginForm(FlaskForm):
     username = StringField("Käyttäjätunnus")
     password = PasswordField("Salasana")
@@ -12,7 +12,7 @@ class LoginForm(FlaskForm):
     class Meta:
         csrf = False
 
-# rekisteröintilomake
+# userin rekisteröintilomake
 class RegistrationForm(FlaskForm):
     username = StringField("Käyttäjätunnus", [validators.Length(min=3)])
     password = PasswordField("Salasana", [validators.Length(min=2)])

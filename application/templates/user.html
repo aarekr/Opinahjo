@@ -32,13 +32,12 @@
 
 <!-- opettajan näkymä -->
 {% if user.teacher %}
-  {% if teacher_info is defined %}
-  defined, raw data: {{ teacher_info }} <br />
-  <b>Opiskelijalista</b> <br />
+  {% if teacher_my_total_courses is defined %}
+  <b>Minun opettamat kurssit</b> <br />
   <ul>
-    {% for user in teacher_info %}
-      {% if user.student %}
-      <li>{{user.name}}</li>
+    {% for kurssi in teacher_my_total_courses %}
+      {% if user.id==kurssi.teacher %} <!-- kirjautunut opettaja -->
+      <li>{{kurssi.name}}</li>
       {% endif %}
     {% endfor %}
   </ul>
@@ -48,17 +47,20 @@
 
 
 {% if user.teacher %}
-TEACHER TOTAL COURSES <br />
-{% if teacher_my_total_courses is defined %}
-  defined -
-  {{ teacher_my_total_courses }} <br />
+  {% if teacher_info is defined %}
+  <b>Opiskelijalista</b> <br />
   <ul>
-    {% for kurssi in teacher_my_total_courses %}
-    <li>{{kurssi.name}}</li>
+    {% for user in teacher_info %}
+      {% if user.student %} <!-- näytetään usereista vain opskelijat -->
+      <li>{{user.name}}</li>
+      {% endif %}
     {% endfor %}
   </ul>
-{% endif %}
+  {% endif %}
 <hr>
 {% endif %}
+
+
+
 
 {% endblock %}

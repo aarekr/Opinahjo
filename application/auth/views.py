@@ -8,7 +8,7 @@ from application.auth.forms import RegistrationForm
 
 @app.route("/auth/login", methods = ["GET", "POST"])
 def auth_login():
-    # jos käyttäjä on jo kirjautunut => ohjataan etusivulle
+    # jos käyttäjä on jo kirjautunut => ohjataan Opetustarjonta-sivulle
     if current_user.is_authenticated:
         return redirect(url_for('kurssit_index'))
 

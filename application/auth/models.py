@@ -35,8 +35,8 @@ class User(Base):
     def is_authenticated(self):
         return True
 
-    @staticmethod
-    def teacher_info():
+    @staticmethod # opettajan näkemä opiskelijalista
+    def teacher_info(): # Minun opetus, user.html
         stmt = text("SELECT Account.id, Account.name, Account.student "
                     "FROM Account")
         res = db.engine.execute(stmt)
@@ -47,21 +47,21 @@ class User(Base):
 
         return response
 
-    @staticmethod
-    def teacher_my_total_courses():
-        stmt = text("SELECT Kurssi.id, Kurssi.name "
+    @staticmethod # opettajan opettamat kurssit
+    def teacher_my_total_courses(): # Minun opetus, user.html
+        stmt = text("SELECT Kurssi.id, Kurssi.name, Kurssi.account_id "
                     "FROM Kurssi "
-                    "LEFT JOIN Account ON Account.id = Account.id ")
+                    "LEFT JOIN Account ON Account_id = Account.id ")
         res = db.engine.execute(stmt)
 
         response = []
         for row in res:
-            response.append({"id":row[0], "name":row[1]})
+            response.append({"id":row[0], "name":row[1], "teacher":row[2]})
 
         return response
 
     @staticmethod # kurssien lkm
-    def school_total_courses_offered():
+    def school_total_courses_offered(): # Opetusohjelma, list.html
         stmt = text("SELECT COUNT(Kurssi.id) FROM Kurssi")
         res = db.engine.execute(stmt)
         response = []
@@ -70,7 +70,7 @@ class User(Base):
         return response
 
     @staticmethod # opettajien lkm
-    def school_teachers_total():
+    def school_teachers_total(): # Opetusohjelma, list.html
         stmt = text("SELECT COUNT(Account.id) FROM Account WHERE Account.teacher = 1")
         res = db.engine.execute(stmt)
         response = []
@@ -90,7 +90,7 @@ class User(Base):
         return response
 
     @staticmethod # opiskelijan kurssi-ilmoittautumiset
-    def student_my_courses():
+    def student_my_courses(): #  Minun kurssit, user.html
         stmt = text("SELECT Kurssi.name, Account.name "
                     "FROM Account, Kurssi, Enrollments "
                     "WHERE Account.id = Enrollments.account_id "

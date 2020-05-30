@@ -25,3 +25,9 @@ Kurssikeskus järjestää maksullisia ohjelmoinnin kursseja. Jokaisen ohjelmoint
 6. Varauksen peruutus kurssikeskuksen toimesta, jos maksua ei ole maksettu
 7. Varauksen peruutus asiakkaan toimesta
 8. Kurssin peruutus
+
+
+### Testitunnukset
+1. opettaja-tunnukset: opettaja 1 ja opettaja 2, salasana: sala
+2. opiskelija-tunnukset: opisk 1, opisk 2 ja opisk 3, salasana: ak
+

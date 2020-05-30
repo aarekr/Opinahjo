@@ -15,26 +15,18 @@ def kurssit_index():
     school_total_courses_offered = User.school_total_courses_offered()
     school_teachers_total = User.school_teachers_total()
     courses_and_teachers = User.courses_and_teachers()
+    student_my_courses = User.student_my_courses()
     return render_template("kurssit/list.html", kurssit = kurssit, 
         school_total_courses_offered=school_total_courses_offered, 
         school_teachers_total=school_teachers_total, 
-        courses_and_teachers=courses_and_teachers)
+        courses_and_teachers=courses_and_teachers, 
+        student_my_courses=student_my_courses)
 
 # näyttää kurssinlisäyslomakkeen, sallittu vain opettajille
 @app.route("/kurssit/lisaauusikurssi/")
 @login_required
 def kurssit_form():
     return render_template("kurssit/lisaauusikurssi.html", form = CourseForm())
-
-# opiskelija varaa kurssipaikan
-@app.route("/kurssit/<kurssi_id>/", methods=["POST"])
-@login_required
-def kurssit_enroll(kurssi_id):
-    k = Kurssi.query.get(kurssi_id)
-    k.enrolled = True
-#    k.account_id = current_user.id # opiskelija-kurssi viite
-    db.session().commit()
-    return redirect(url_for("kurssit_index"))
 
 # lisätään kurssi tietokantaan, sallittu vain opettajille
 @app.route("/kurssit/", methods=["POST"])
@@ -54,3 +46,18 @@ def kurssit_create():
     db.session().add(k)
     db.session().commit()
     return redirect(url_for("kurssit_index"))
+
+# opiskelijan kurssi-ilmoittautuminen
+@app.route("/ilmoittaudu/<kurssi_id>/", methods=["POST"])
+def ilmoittaudu_kurssille(kurssi_id):
+    print("**************** opiskelija ilmoittautuu ****************")
+    k = Kurssi.query.get(kurssi_id)
+    print("kurssi_id: ", kurssi_id)
+    print("opiske_id: ", current_user.id)
+
+#    k.account_id = current_user.id # opiskelija-kurssi viite
+#    db.session().commit()
+#    return redirect(url_for("kurssit_index"))
+
+
+    return "ilmoittautuminen otettu vastaan"

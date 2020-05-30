@@ -80,18 +80,18 @@ class User(Base):
 
     @staticmethod # yhteenveto: kurssit ja opettajat
     def courses_and_teachers(): # Opetusohjelma, list.html
-        stmt = text("SELECT Kurssi.name, Account.name "
+        stmt = text("SELECT Kurssi.id, Kurssi.name, Account.name "
                     "FROM Kurssi, Account "
                     "WHERE Kurssi.account_id = Account.id")
         res = db.engine.execute(stmt)
         response = []
         for row in res:
-            response.append({"kurssi":row[0], "opettaja":row[1]})
+            response.append({"id":row[0], "kurssi":row[1], "opettaja":row[2]})
         return response
 
     @staticmethod # opiskelijan kurssi-ilmoittautumiset
     def student_my_courses(): #  Minun kurssit, user.html
-        stmt = text("SELECT Kurssi.name, Account.name "
+        stmt = text("SELECT Kurssi.id, Kurssi.name, Account.name "
                     "FROM Account, Kurssi, Enrollments "
                     "WHERE Account.id = Enrollments.account_id "
                     "AND Kurssi.id = Enrollments.kurssi_id "
@@ -99,5 +99,5 @@ class User(Base):
         res = db.engine.execute(stmt)
         response = []
         for row in res:
-            response.append({"kurssi":row[0], "student":row[1]})
+            response.append({"id":row[0], "kurssi":row[1], "student":row[2]})
         return response

@@ -13,9 +13,7 @@
 
 <!-- opiskelijalle näytetään kurssi-ilmoittautumiset -->
 {% if user.student %}
-  STUDENT MY COURSES <br />
   {% if student_my_courses is defined %}
-  defined, raw data: {{student_my_courses}} <br/>
   <b>Ilmoittautumiset</b>
     <ul>
       {% for kurssi in student_my_courses %}

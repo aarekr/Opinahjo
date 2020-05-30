@@ -20,8 +20,11 @@
   {% endif %}
 
 
+
+  <!-- Opetusohjelma-taulu -->
   <table border="1">
     <tr>
+      <center><th width="40">Nro</th><center>
       <center><th width="250">Kurssi</th><center>
       <center><th width="130">Opettaja</th><center>
       <!-- opettajalle ei näytetä paikanvarausta ja ilmoittautumista -->
@@ -32,14 +35,25 @@
     </tr>
     {% for kurssi in courses_and_teachers %}
     <tr>
+      <td align="center">{{ kurssi.id }}</td>
       <td>{{ kurssi.kurssi }}</td>
       <td align="center">{{kurssi.opettaja}}
       </td>
-      <!-- opettajalle ei näytetä ilmoittautumista -->
+      <!-- opettajalle ei näytetä paikanvarausta ja ilmoittautumista -->
       {% if not current_user.teacher %}
-      <td align="center">...</td>
+        {% if current_user.student %} <!-- jos opiskelija kirjautunut sovellukseen -->
+          {% for kurs in student_my_courses %}
+            {% if kurs.id==kurssi.id %} <!-- jos opiskelija on ilmoittautunut ko. kurssille -->
+              <td align="center">kyllä</td>
+            {% else %} <!-- ei ilmoittautunut -->
+              <td align="center">ei</td>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+        <td align="center">...</td>
+        {% endif %}
       <td>
-        <form>
+        <form method="POST" action="{{ url_for('ilmoittaudu_kurssille', kurssi_id=kurssi.id) }}">
           <center><input type="submit" value="Varaa paikka"/></center>
         </form>
       </td>
@@ -48,6 +62,26 @@
     {% endfor %}
   </table>
 <hr>
+
+
+
+<!-- opiskelijalle näytetään hänen kurssi-ilmoittautumiset -->
+{% if current_user.student %}
+  {% if student_my_courses is defined %}
+  defined, raw data: {{student_my_courses}} <br/>
+  <b>Ilmoittautumiset</b>
+    <ul>
+      {% for kurssi in student_my_courses %}
+        {% if current_user.username == kurssi.student %}
+          <li>{{kurssi.kurssi}}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  <hr>
+  {% endif %}
+{% endif %}
+
+
 
 <!-- opettajalle näytetään hänen opettamat kurssit -->
   {% if current_user.teacher %}

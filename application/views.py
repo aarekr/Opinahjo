@@ -7,9 +7,6 @@ from flask_login import login_required, current_user
 # etusivu
 @app.route("/")
 def index():
-#    user = User.query.all()
-#    kurssi = Kurssi.query.all()
-#    return render_template("index.html", user=user, kurssi=kurssi)
     return render_template("index.html")
 
 # käyttäjän henk.koht sivu - Minun kurssit, Minun opetus

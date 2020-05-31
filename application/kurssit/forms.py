@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, SubmitField, validators
 
 class CourseForm(FlaskForm):
-    name = StringField("Kurssin nimi", [validators.Length(min=2)])
+    name = StringField("Kurssin nimi", [validators.Length(min=2, max=20)])
     enrolled = BooleanField("Paikka varattu")
     submit = SubmitField('Lisää opetusohjelmaan')
 

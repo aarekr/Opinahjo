@@ -4,8 +4,8 @@ from flask_login import login_required, current_user
 from application import app, db
 from application.kurssit.models import Kurssi
 from application.kurssit.forms import CourseForm
-
 from application.auth.models import User
+from application.models import enrollments
 
 
 # listaa kaikki kurssit
@@ -31,7 +31,7 @@ def kurssit_form():
 # lisätään kurssi tietokantaan, sallittu vain opettajille
 @app.route("/kurssit/", methods=["POST"])
 @login_required
-def kurssit_create():
+def kurssit_create(): # useampi samanniminen kurssi sallittu tarkoituksella
     if not current_user.teacher: # jos ei-opettaja lisäämässä uutta kurssia
         return redirect(url_for("kurssit_index"))
 
@@ -40,7 +40,6 @@ def kurssit_create():
         return render_template("kurssit/lisaauusikurssi.html", form = form)
 
     k = Kurssi(form.name.data)
-
     k.account_id = current_user.id
 
     db.session().add(k)
@@ -51,13 +50,16 @@ def kurssit_create():
 @app.route("/ilmoittaudu/<kurssi_id>/", methods=["POST"])
 def ilmoittaudu_kurssille(kurssi_id):
     print("**************** opiskelija ilmoittautuu ****************")
-    k = Kurssi.query.get(kurssi_id)
-    print("kurssi_id: ", kurssi_id)
-    print("opiske_id: ", current_user.id)
-
+    ilm = enrollments
+    print("*****kurssi_id: ", kurssi_id)
+    print("*****opiske_id: ", current_user.id)
+    form = CourseForm(request.form)
+    k = Kurssi(form.name.data)
+    print("*****k     : ", k.account_id)
+    
+    
+    
 #    k.account_id = current_user.id # opiskelija-kurssi viite
 #    db.session().commit()
-#    return redirect(url_for("kurssit_index"))
 
-
-    return "ilmoittautuminen otettu vastaan"
+    return redirect(url_for("kurssit_index"))

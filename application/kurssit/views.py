@@ -49,6 +49,7 @@ def kurssit_create(): # useampi samanniminen kurssi sallittu tarkoituksella
 # opiskelijan kurssi-ilmoittautuminen
 @app.route("/ilmoittaudu/<kurssi_id>/", methods=["POST"])
 def ilmoittaudu_kurssille(kurssi_id):
+    # tämä osuus on kesken
     print("**************** opiskelija ilmoittautuu ****************")
     ilm = enrollments
     print("*****kurssi_id: ", kurssi_id)
@@ -59,7 +60,8 @@ def ilmoittaudu_kurssille(kurssi_id):
     
     
     
-#    k.account_id = current_user.id # opiskelija-kurssi viite
+
 #    db.session().commit()
 
-    return redirect(url_for("kurssit_index"))
+#    return redirect(url_for("kurssit_index"))
+    return "Kurssi-ilmoittautuminen ei tällä hetkellä ole valitettavasti mahdollista"

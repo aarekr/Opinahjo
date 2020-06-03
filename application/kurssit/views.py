@@ -46,6 +46,17 @@ def kurssit_create(): # useampi samanniminen kurssi sallittu tarkoituksella
     db.session().commit()
     return redirect(url_for("kurssit_index"))
 
+# kurssin deletointi
+@app.route("/delete/<kurssi_id>/", methods=["POST"])
+@login_required
+def kurssit_delete(kurssi_id):
+    deletoitu_kurssi = Kurssi.query.get(kurssi_id)
+
+    db.session().delete(deletoitu_kurssi)
+    db.session().commit()
+
+    return redirect(url_for("kurssit_index"))
+
 # opiskelijan kurssi-ilmoittautuminen
 @app.route("/ilmoittaudu/<kurssi_id>/", methods=["POST"])
 def ilmoittaudu_kurssille(kurssi_id):

@@ -35,7 +35,11 @@
   <ul>
     {% for kurssi in teacher_my_total_courses %}
       {% if user.id==kurssi.teacher %} <!-- kirjautunut opettaja -->
-      <li>{{kurssi.name}}</li>
+      <li>{{kurssi.name}}
+      <form method="POST" action="{{ url_for('kurssit_delete', kurssi_id=kurssi.id) }}">
+        <input type="submit" value="Poista kurssi"/>
+      </form>
+      </li>
       {% endif %}
     {% endfor %}
   </ul>

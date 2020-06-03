@@ -57,6 +57,39 @@ def kurssit_delete(kurssi_id):
 
     return redirect(url_for("kurssit_index"))
 
+# kurssin muokkaaminen
+@app.route("/modify/<kurssi_id>", methods=["GET"])
+@login_required
+def kurssit_modify(kurssi_id):
+    kurssi = Kurssi.query.get(kurssi_id)
+
+    return render_template("kurssit/update.html", form = CourseForm(), kurssi = kurssi)
+
+# kurssin päivitys
+@app.route("/kurssit/update/<kurssi_id>", methods=["POST"])
+@login_required
+def kurssit_update(kurssi_id):
+    form = CourseForm(request.form)
+    kurssi = Kurssi.query.get(kurssi_id)
+
+    if not kurssi:
+        return redirect(url_for("kurssit_index"))
+
+    kurssi.name = form.name.data
+
+    if not form.validate():
+        return render_template("kurssit/update.html", form = form, kurssi = kurssi)
+
+    db.session().commit()
+    return redirect(url_for("kurssit_index"))
+
+
+
+
+
+
+
+
 # opiskelijan kurssi-ilmoittautuminen
 @app.route("/ilmoittaudu/<kurssi_id>/", methods=["POST"])
 def ilmoittaudu_kurssille(kurssi_id):

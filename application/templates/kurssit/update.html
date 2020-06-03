@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h3>Muokkaa kurssia</h3> <br />
+{{ error }}
+<form method="POST" action="{{ url_for('kurssit_update', kurssi_id=kurssi.id) }}">
+  <table>
+    <tr>
+      <td>{{ form.name.label }} {{ form.name(value=kurssi.name) }}</td>
+      <td>{% for error in form.name.errors %}
+          {{ error }}
+          {% endfor %}</td>
+    </tr>
+    <tr><td colspan="3"><input type="submit" value="Tallenna muutokset"/></td>
+    </tr>
+  </table>
+</form>
+
+
+
+
+
+{% endblock %}

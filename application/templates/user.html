@@ -35,9 +35,11 @@
   <ul>
     {% for kurssi in teacher_my_total_courses %}
       {% if user.id==kurssi.teacher %} <!-- kirjautunut opettaja -->
-      <li>{{kurssi.name}}
+      <li>{{kurssi.name}} <br/>
+      <a href="{{ url_for('kurssit_modify', kurssi_id=kurssi.id) }}">
+        <input type="submit" value="Muokkaa" style="width:150px"/></a>
       <form method="POST" action="{{ url_for('kurssit_delete', kurssi_id=kurssi.id) }}">
-        <input type="submit" value="Poista kurssi"/>
+        <input type="submit" value="Poista kurssi" style="width:150px"/>
       </form>
       </li>
       {% endif %}
@@ -53,7 +55,7 @@
   <b>Opiskelijalista</b> <br />
   <ul>
     {% for user in teacher_info %}
-      {% if user.student %} <!-- näytetään usereista vain opskelijat -->
+      {% if user.student %} <!-- näytetään usereista vain opiskelijat -->
       <li>{{user.name}}</li>
       {% endif %}
     {% endfor %}

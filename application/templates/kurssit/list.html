@@ -42,7 +42,7 @@
       {% if not current_user.teacher %}
         <td align="center">...</td>
       <td>
-        <form method="POST" action="{{ url_for('ilmoittaudu_kurssille', kurssi_id=kurssi.id) }}">
+        <form method="POST" action="{{ url_for('enroll_course', kurssi_id=kurssi.id) }}">
           <center><input type="submit" value="Varaa paikka"/></center>
         </form>
       </td>

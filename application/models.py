@@ -1,6 +1,6 @@
 from application import db
 
-enrollments = db.Table('enrollments', 
+enrollments = db.Table('enrollments',                   # tähän:, ondelete='cascade'  -molempiin
     db.Column('kurssi_id', db.Integer, db.ForeignKey('kurssi.id'), primary_key=True), 
     db.Column('account_id', db.Integer, db.ForeignKey('account.id'), primary_key=True)
 )

@@ -92,20 +92,11 @@ def kurssit_update(kurssi_id):
 
 # opiskelijan kurssi-ilmoittautuminen
 @app.route("/ilmoittaudu/<kurssi_id>/", methods=["POST"])
-def ilmoittaudu_kurssille(kurssi_id):
-    # tämä osuus on kesken
-    print("**************** opiskelija ilmoittautuu ****************")
-    ilm = enrollments
-    print("*****kurssi_id: ", kurssi_id)
-    print("*****opiske_id: ", current_user.id)
-    form = CourseForm(request.form)
-    k = Kurssi(form.name.data)
-    print("*****k     : ", k.account_id)
-    
-    
-    
+def enroll_course(kurssi_id):
+    user = User.query.get(current_user.id)
+    kurssi = Kurssi.query.get(kurssi_id)
 
-#    db.session().commit()
+    kurssi.users.append(user)
+    db.session().commit()
 
-#    return redirect(url_for("kurssit_index"))
-    return "Kurssi-ilmoittautuminen ei tällä hetkellä ole valitettavasti mahdollista"
+    return redirect(url_for("kurssit_index"))

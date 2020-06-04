@@ -12,7 +12,7 @@ class Kurssi(Base):
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'),
                            nullable=False)
 
-    enrollments = db.relationship('User', secondary=enrollments, lazy='subquery', backref=db.backref('kurssit', lazy=True))
+#    enrollments = db.relationship('User', secondary=enrollments, lazy='subquery', backref=db.backref('kurssit', lazy=True))
 
     def __init__(self, name):
         self.name = name

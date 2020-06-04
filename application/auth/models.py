@@ -14,7 +14,7 @@ class User(Base):
     student = db.Column(db.Boolean, nullable=False)
     teacher = db.Column(db.Boolean, nullable=False)
 
-    enrollments = db.relationship('Kurssi', secondary=enrollments, lazy='subquery', backref=db.backref('users', lazy=True)) # kurssit eikä users ???
+    enrollments = db.relationship('Kurssi', secondary=enrollments,  backref=db.backref('users', lazy=True))
 
     def __init__(self, name, username, password, student, teacher):
         self.name = name

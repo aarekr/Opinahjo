@@ -15,12 +15,14 @@ def index():
 def user(usernimi):
     user = User.query.filter_by(username=usernimi).first_or_404()
     teacher_info = User.teacher_info()
-#    teacher_my_courses = Kurssi.teacher_my_courses()
-    teacher_my_total_courses = User.teacher_my_total_courses()
+    teacher_my_courses = User.teacher_my_courses()
     student_my_courses = User.student_my_courses()
+
+    if user.id != current_user.id:
+        return "Et voi tarkastella toisen käyttäjän tietoja!"
 
     return render_template('user.html', user=user, 
         teacher_info=teacher_info, 
-        teacher_my_total_courses=teacher_my_total_courses, 
+        teacher_my_courses=teacher_my_courses, 
         student_my_courses=student_my_courses
     )

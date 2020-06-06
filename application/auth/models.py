@@ -35,6 +35,10 @@ class User(Base):
     def is_authenticated(self):
         return True
 
+    def roles(self):
+        return ["ADMIN"]
+
+
     @staticmethod # opettajan näkemä opiskelijalista
     def teacher_info(): # Minun opetus, user.html
         stmt = text("SELECT Account.id, Account.name, Account.student "
@@ -48,7 +52,7 @@ class User(Base):
         return response
 
     @staticmethod # opettajan opettamat kurssit
-    def teacher_my_total_courses(): # Minun opetus, user.html
+    def teacher_my_courses(): # Minun opetus, user.html
         stmt = text("SELECT Kurssi.id, Kurssi.name, Kurssi.account_id "
                     "FROM Kurssi "
                     "LEFT JOIN Account ON Account_id = Account.id ")

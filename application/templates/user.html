@@ -16,9 +16,9 @@
   {% if student_my_courses is defined %}
   <b>Ilmoittautumiset</b>
     <ul>
-      {% for kurssi in student_my_courses %}
-        {% if user.username == kurssi.student %}
-          <li>{{kurssi.kurssi}}</li>
+      {% for course in student_my_courses %}
+        {% if user.username == course.student %}
+          <li>{{course.kurssi}}</li>
         {% endif %}
       {% endfor %}
     </ul>
@@ -30,15 +30,15 @@
 
 <!-- opettajan näkymä -->
 {% if user.teacher %}
-  {% if teacher_my_total_courses is defined %}
+  {% if teacher_my_courses is defined %}
   <b>Minun opettamat kurssit</b> <br />
   <ul>
-    {% for kurssi in teacher_my_total_courses %}
-      {% if user.id==kurssi.teacher %} <!-- kirjautunut opettaja -->
-      <li>{{kurssi.name}} <br/>
-      <a href="{{ url_for('kurssit_modify', kurssi_id=kurssi.id) }}">
+    {% for course in teacher_my_courses %}
+      {% if user.id==course.teacher %} <!-- kirjautunut opettaja -->
+      <li>{{course.name}} <br/>
+      <a href="{{ url_for('kurssit_modify', kurssi_id=course.id) }}">
         <input type="submit" value="Muokkaa" style="width:150px"/></a>
-      <form method="POST" action="{{ url_for('kurssit_delete', kurssi_id=kurssi.id) }}">
+      <form method="POST" action="{{ url_for('kurssit_delete', kurssi_id=course.id) }}">
         <input type="submit" value="Poista kurssi" style="width:150px"/>
       </form>
       </li>

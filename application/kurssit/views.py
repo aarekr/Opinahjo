@@ -8,25 +8,25 @@ from application.auth.models import User
 from application.models import enrollments
 
 
-# listaa kaikki kurssit
+# listaa kaikki kurssit, kaikki näkee
 @app.route("/kurssit", methods=["GET"])
 def kurssit_index():
-    kurssit = Kurssi.query.all()
+    courses = Kurssi.query.all()
     school_total_courses_offered = User.school_total_courses_offered()
     school_teachers_total = User.school_teachers_total()
     courses_and_teachers = User.courses_and_teachers()
     student_my_courses = User.student_my_courses()
-    return render_template("kurssit/list.html", kurssit = kurssit, 
+    return render_template("kurssit/list.html", kurssit = courses, 
         school_total_courses_offered=school_total_courses_offered, 
         school_teachers_total=school_teachers_total, 
         courses_and_teachers=courses_and_teachers, 
         student_my_courses=student_my_courses)
 
 # näyttää kurssinlisäyslomakkeen, sallittu vain opettajille
-@app.route("/kurssit/lisaauusikurssi/")
+@app.route("/kurssit/addnewcourse/")
 @login_required
 def kurssit_form():
-    return render_template("kurssit/lisaauusikurssi.html", form = CourseForm())
+    return render_template("kurssit/addnewcourse.html", form = CourseForm())
 
 # lisätään kurssi tietokantaan, sallittu vain opettajille
 @app.route("/kurssit/", methods=["POST"])
@@ -37,7 +37,7 @@ def kurssit_create(): # useampi samanniminen kurssi sallittu tarkoituksella
 
     form = CourseForm(request.form)
     if not form.validate():
-        return render_template("kurssit/lisaauusikurssi.html", form = form)
+        return render_template("kurssit/addnewcourse.html", form = form)
 
     k = Kurssi(form.name.data)
     k.account_id = current_user.id
@@ -46,57 +46,56 @@ def kurssit_create(): # useampi samanniminen kurssi sallittu tarkoituksella
     db.session().commit()
     return redirect(url_for("kurssit_index"))
 
-# kurssin deletointi
+# kurssin deletointi, vain kurssin lisännyt opettaja
 @app.route("/delete/<kurssi_id>/", methods=["POST"])
 @login_required
 def kurssit_delete(kurssi_id):
-    deletoitu_kurssi = Kurssi.query.get(kurssi_id)
+    deleted_course = Kurssi.query.get(kurssi_id)
+    if deleted_course.account_id != current_user.id:
+        return "Et voi poistaa tätä kurssia opetusohjelmasta!"
 
-    db.session().delete(deletoitu_kurssi)
+    db.session().delete(deleted_course)
     db.session().commit()
 
     return redirect(url_for("kurssit_index"))
 
-# kurssin muokkaaminen
+# kurssin muokkaaminen, vain kurssin lisännyt opettaja
 @app.route("/modify/<kurssi_id>", methods=["GET"])
 @login_required
 def kurssit_modify(kurssi_id):
-    kurssi = Kurssi.query.get(kurssi_id)
+    course = Kurssi.query.get(kurssi_id)
+    if course.account_id != current_user.id:
+        return "Et voi muokata tätä kursseja!"
 
-    return render_template("kurssit/update.html", form = CourseForm(), kurssi = kurssi)
+    return render_template("kurssit/update.html", form = CourseForm(), kurssi = course)
 
 # kurssin päivitys
 @app.route("/kurssit/update/<kurssi_id>", methods=["POST"])
 @login_required
 def kurssit_update(kurssi_id):
     form = CourseForm(request.form)
-    kurssi = Kurssi.query.get(kurssi_id)
+    course = Kurssi.query.get(kurssi_id)
 
-    if not kurssi:
+    if not course:
         return redirect(url_for("kurssit_index"))
 
-    kurssi.name = form.name.data
+    course.name = form.name.data
 
     if not form.validate():
-        return render_template("kurssit/update.html", form = form, kurssi = kurssi)
+        return render_template("kurssit/update.html", form = form, kurssi = course)
 
     db.session().commit()
     return redirect(url_for("kurssit_index"))
 
 
-
-
-
-
-
-
 # opiskelijan kurssi-ilmoittautuminen
-@app.route("/ilmoittaudu/<kurssi_id>/", methods=["POST"])
+@app.route("/enroll/<kurssi_id>/", methods=["POST"])
+@login_required
 def enroll_course(kurssi_id):
     user = User.query.get(current_user.id)
-    kurssi = Kurssi.query.get(kurssi_id)
+    course = Kurssi.query.get(kurssi_id)
 
-    kurssi.users.append(user)
+    course.users.append(user)
     db.session().commit()
 
     return redirect(url_for("kurssit_index"))

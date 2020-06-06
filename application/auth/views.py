@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, current_user, login_required
 
 from application import app, db
 from application.auth.models import User
@@ -51,17 +51,19 @@ def create_user():
     db.session().add(k)
     db.session().commit()
 
-    return redirect(url_for("tili_luotu"))
+    return redirect(url_for("account_created"))
 
 
 # uuden opettajatilin rekisteröinti
 @app.route("/opettaja")
-def opettaja_registration():
+#@login_required(role="ADMIN")
+def teacher_registration():
     return render_template("auth/uudenopettajanrekisterointi.html", form = RegistrationForm())
 
 # uuden opettajan luonti
 @app.route("/opettaja", methods=["POST"])
-def luo_opettaja():
+#@login_required(role="ADMIN")
+def create_teacher():
     form = RegistrationForm(request.form)
     if not form.validate():
         return render_template("auth/uudenopettajanrekisterointi.html", form = form)
@@ -72,9 +74,9 @@ def luo_opettaja():
     db.session().add(t)
     db.session().commit()
 
-    return redirect(url_for("tili_luotu"))
+    return redirect(url_for("account_created"))
 
 # vahvistetaan, että käyttäjätili on luotu
 @app.route("/auth/accountcreated")
-def tili_luotu():
+def account_created():
     return render_template("auth/accountcreated.html")

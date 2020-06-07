@@ -36,13 +36,20 @@ def kurssit_create(): # useampi samanniminen kurssi sallittu tarkoituksella
         return redirect(url_for("kurssit_index"))
 
     form = CourseForm(request.form)
+    course = Kurssi(form.name.data, form.start_date.data, form.end_date.data)
+
     if not form.validate():
         return render_template("kurssit/addnewcourse.html", form = form)
 
-    k = Kurssi(form.name.data)
-    k.account_id = current_user.id
+    if not form.validate_dates():
+        form.start_date.errors.append("Tarkista päivämäärä")
+        form.end_date.errors.append("Tarkista päivämäärä")
+        return render_template("kurssit/update.html", form = form)
 
-    db.session().add(k)
+#    course = Kurssi(form.name.data, form.start_date.data, form.end_date.data)
+    course.account_id = current_user.id
+
+    db.session().add(course)
     db.session().commit()
     return redirect(url_for("kurssit_index"))
 
@@ -65,7 +72,7 @@ def kurssit_delete(kurssi_id):
 def kurssit_modify(kurssi_id):
     course = Kurssi.query.get(kurssi_id)
     if course.account_id != current_user.id:
-        return "Et voi muokata tätä kursseja!"
+        return "Et voi muokata tätä kurssia!"
 
     return render_template("kurssit/update.html", form = CourseForm(), kurssi = course)
 
@@ -80,8 +87,15 @@ def kurssit_update(kurssi_id):
         return redirect(url_for("kurssit_index"))
 
     course.name = form.name.data
+    course.start_date = form.start_date.data
+    course.end_date = form.end_date.data
 
     if not form.validate():
+        return render_template("kurssit/update.html", form = form, kurssi = course)
+
+    if not form.validate_dates():
+        form.start_date.errors.append("Tarkista päivämäärä")
+        form.end_date.errors.append("Tarkista päivämäärä")
         return render_template("kurssit/update.html", form = form, kurssi = course)
 
     db.session().commit()

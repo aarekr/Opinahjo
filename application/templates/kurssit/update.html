@@ -7,12 +7,29 @@
 <form method="POST" action="{{ url_for('kurssit_update', kurssi_id=kurssi.id) }}">
   <table>
     <tr>
-      <td>{{ form.name.label }} {{ form.name(value=kurssi.name) }}</td>
+      <td>{{ form.name.label }}</td>
+      <td>{{ form.name(value=kurssi.name) }}</td>
       <td>{% for error in form.name.errors %}
           {{ error }}
           {% endfor %}</td>
     </tr>
-    <tr><td colspan="3"><input type="submit" value="Tallenna muutokset"/></td>
+    <tr>
+      <td>{{ form.start_date.label }}</td>
+      <td>{{ form.start_date(value=kurssi.start_date) }}</td>
+      <td>{% for error in form.start_date.errors %}
+          {{ error }}
+          {% endfor %}</td>
+    </tr>
+    <tr>
+      <td>{{ form.end_date.label }}</td>
+      <td>{{ form.end_date(value=kurssi.end_date) }}</td>
+      <td>{% for error in form.end_date.errors %}
+          {{ error }}
+          {% endfor %}</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td colspan="3"><input type="submit" value="Tallenna muutokset"/></td>
     </tr>
   </table>
 </form>

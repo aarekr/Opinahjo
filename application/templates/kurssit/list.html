@@ -24,26 +24,28 @@
   <!-- Opetusohjelma-taulu -->
   <table border="1">
     <tr>
-      <center><th width="40">Nro</th><center>
-      <center><th width="250">Kurssi</th><center>
-      <center><th width="130">Opettaja</th><center>
-      <!-- opettajalle ei näytetä paikanvarausta ja ilmoittautumista -->
+      <th width="40" style="text-align: center">Nro</th>
+      <th width="250">Kurssi</th>
+      <th width="150" style="text-align: center">Opettaja</th>
+      <th width="150" style="text-align: center">Alkaa</th>
+      <th width="150" style="text-align: center">Loppuu</th>
+      <!-- opettajalle ei näytetä ilmoittautumisnappia -->
       {% if not current_user.teacher %}
-      <center><th width="100">Paikka varattu</th><center>
-      <center><th width="170">Ilmoittautuminen</th><center>
+      <th width="170" style="text-align: center">Ilmoittautuminen</th>
       {% endif %}
     </tr>
     {% for kurssi in courses_and_teachers %}
     <tr>
-      <td align="center">{{ kurssi.id }}</td>
+      <td style="text-align: center">{{ kurssi.id }}</td>
       <td>{{ kurssi.kurssi }}</td>
-      <td align="center">{{kurssi.opettaja}}</td>
-      <!-- opettajalle ei näytetä paikanvarausta ja ilmoittautumista -->
+      <td style="text-align: center">{{kurssi.opettaja}}</td>
+      <td style="text-align: center">{{kurssi.start_date}}</td>
+      <td style="text-align: center">{{kurssi.end_date}}</td>
+      <!-- opettajalle ei näytetä ilmoittautumisnappia -->
       {% if not current_user.teacher %}
-        <td align="center">...</td>
       <td>
         <form method="POST" action="{{ url_for('enroll_course', kurssi_id=kurssi.id) }}">
-          <center><input type="submit" value="Varaa paikka"/></center>
+          <center><input type="submit" value="Ilmoittaudu"/></center>
         </form>
       </td>
       {% endif %}

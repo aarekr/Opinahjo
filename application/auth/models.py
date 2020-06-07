@@ -13,15 +13,17 @@ class User(Base):
     password = db.Column(db.String(144), nullable=False)
     student = db.Column(db.Boolean, nullable=False)
     teacher = db.Column(db.Boolean, nullable=False)
+    user_role = db.Column(db.String(80))
 
     enrollments = db.relationship('Kurssi', secondary=enrollments,  backref=db.backref('users', lazy=True))
 
-    def __init__(self, name, username, password, student, teacher):
+    def __init__(self, name, username, password, student, teacher, user_role):
         self.name = name
         self.username = username
         self.password = password
         self.student = student
         self.teacher = teacher
+        self.user_role = user_role
 
     def get_id(self):
         return self.id
@@ -35,9 +37,11 @@ class User(Base):
     def is_authenticated(self):
         return True
 
+    def get_user_role(self):
+        return self.user_role
+
     def roles(self):
         return ["ADMIN"]
-
 
     @staticmethod # opettajan näkemä opiskelijalista
     def teacher_info(): # Minun opetus, user.html
@@ -84,13 +88,13 @@ class User(Base):
 
     @staticmethod # yhteenveto: kurssit ja opettajat
     def courses_and_teachers(): # Opetusohjelma, list.html
-        stmt = text("SELECT Kurssi.id, Kurssi.name, Account.name "
+        stmt = text("SELECT Kurssi.id, Kurssi.name, Kurssi.start_date, Kurssi.end_date, Account.name "
                     "FROM Kurssi, Account "
                     "WHERE Kurssi.account_id = Account.id")
         res = db.engine.execute(stmt)
         response = []
         for row in res:
-            response.append({"id":row[0], "kurssi":row[1], "opettaja":row[2]})
+            response.append({"id":row[0], "kurssi":row[1], "start_date":row[2], "end_date":row[3], "opettaja":row[4]})
         return response
 
     @staticmethod # opiskelijan kurssi-ilmoittautumiset

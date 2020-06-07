@@ -18,6 +18,28 @@
       <td>
     </tr>
     <tr>
+      <td>{{ form.start_date.label }}</td>
+      <td>{{ form.start_date }}</td>
+      <td>
+        <ul>
+          {% for error in form.start_date.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      <td>
+    </tr>
+    <tr>
+      <td>{{ form.end_date.label }}</td>
+      <td>{{ form.end_date }}</td>
+      <td>
+        <ul>                                               
+          {% for error in form.end_date.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      <td>
+    </tr>
+    <tr>
       <td></td>
       <td>{{ form.submit() }}</td>
     </tr>

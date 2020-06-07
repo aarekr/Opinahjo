@@ -41,7 +41,8 @@ login_manager.login_message = "Kirjaudu sisään käyttääksesi tätä toiminto
 # roles in login_required
 from functools import wraps
 
-def login_required(_func=None, *, role="ANY"):
+#def login_required(_func=None, *, role="TEACHER"):
+def login_required(_func=None, *, user_role="ANY"):
     def wrapper(func):
         @wraps(func)
         def decorated_view(*args, **kwargs):

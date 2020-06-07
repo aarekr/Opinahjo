@@ -47,7 +47,8 @@ def create_user():
     nimi = request.form.get("username") # nimi = käyttäjätunnus
     student = True
     teacher = False
-    k = User(nimi, nimi, request.form.get("password"), student, teacher)
+    user_role = "STUDENT"
+    k = User(nimi, nimi, request.form.get("password"), student, teacher, user_role)
     db.session().add(k)
     db.session().commit()
 
@@ -56,13 +57,12 @@ def create_user():
 
 # uuden opettajatilin rekisteröinti
 @app.route("/opettaja")
-#@login_required(role="ADMIN")
 def teacher_registration():
     return render_template("auth/uudenopettajanrekisterointi.html", form = RegistrationForm())
 
 # uuden opettajan luonti
 @app.route("/opettaja", methods=["POST"])
-#@login_required(role="ADMIN")
+#@login_required #(role="ADMIN")     # tilapäisesti pois käytöstä
 def create_teacher():
     form = RegistrationForm(request.form)
     if not form.validate():
@@ -70,7 +70,8 @@ def create_teacher():
     nimi = request.form.get("username") # nimi = käyttäjätunnus
     student = False
     teacher = True
-    t = User(nimi, nimi, request.form.get("password"), student, teacher)
+    user_role = "TEACHER"
+    t = User(nimi, nimi, request.form.get("password"), student, teacher, user_role)
     db.session().add(t)
     db.session().commit()
 

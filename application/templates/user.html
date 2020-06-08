@@ -51,20 +51,18 @@
 
 
 {% if user.teacher %}
-  {% if teacher_info is defined %}
-  <b>Opiskelijalista</b> <br />
+  {% if all_enrollments is defined %}
+  <b>Minun kursseille ilmoittautuneet opiskelijat</b> <br />
   <ul>
-    {% for user in teacher_info %}
-      {% if user.student %} <!-- näytetään usereista vain opiskelijat -->
-      <li>{{user.name}}</li>
+    {% for row in all_enrollments %}
+      {% if row.teacher == user.id %}
+      <li>{{row.course}} - {{row.student}}</li>
       {% endif %}
     {% endfor %}
   </ul>
   {% endif %}
 <hr>
 {% endif %}
-
-
 
 
 {% endblock %}

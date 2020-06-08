@@ -109,3 +109,15 @@ class User(Base):
         for row in res:
             response.append({"id":row[0], "kurssi":row[1], "student":row[2]})
         return response
+
+    @staticmethod # kaikki opiskelijat, mille kurssille ilmoittautunut, opettaja-id
+    def all_enrollments():
+        stmt = text("SELECT Account.name, Kurssi.name, Kurssi.account_id "
+                    "FROM Kurssi, Account, enrollments "
+                    "WHERE Account.id=enrollments.account_id AND Kurssi.id=enrollments.kurssi_id "
+                    "ORDER BY Kurssi.name")
+        res = db.engine.execute(stmt)
+        response = []
+        for row in res:
+            response.append({"student":row[0], "course":row[1], "teacher":row[2]})
+        return response

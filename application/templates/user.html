@@ -53,16 +53,44 @@
 {% if user.teacher %}
   {% if all_enrollments is defined %}
   <b>Minun kursseille ilmoittautuneet opiskelijat</b> <br />
-  <ul>
+  <table border="1">
+    <tr>
+      <th width="200" style="text-align: center">Kurssi</th>
+      <th width="120" style="text-align: center">Opiskelija</th>
+    </tr>
     {% for row in all_enrollments %}
-      {% if row.teacher == user.id %}
-      <li>{{row.course}} - {{row.student}}</li>
-      {% endif %}
+    {% if row.teacher == user.id %}
+    <tr>
+      <td>{{row.course}}</td>
+      <td style="text-align: center">{{row.student}}</td>
+    </tr>
+    {% endif %}
     {% endfor %}
-  </ul>
+  </table>
   {% endif %}
 <hr>
 {% endif %}
 
+
+{% if user.teacher %}
+  {% if student_enrollments_count is defined %}
+  <b>Opiskelijakohtaiset ilmoittautumismäärät</b> <br />
+  <table border="1">
+    <tr>
+      <th width="100" style="text-align: center">Nimi</th>
+      <th width="100" style="text-align: center">Kursseja</th>
+    </tr>
+    {% for row in student_enrollments_count %}
+    {% if row.student %}
+    <tr>
+      <td style="text-align: center">{{row.name}}</td>
+      <td style="text-align: center">{{row.count}}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+  </table>
+  {% endif %}
+<hr>
+{% endif %}
 
 {% endblock %}

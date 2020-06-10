@@ -134,3 +134,15 @@ class User(Base):
         for row in res:
             response.append({"name":row[0], "count":row[1], "student":row[2]})
         return response
+
+    @staticmethod # kaikki kurssit ja ilmoittautumismäärät
+    def courses_and_enrollments_count():
+        stmt = text("SELECT Kurssi.name, COUNT(Account.id) "
+                    "FROM Account, Kurssi, enrollments "
+                    "WHERE Kurssi.id=enrollments.kurssi_id AND Account.id=enrollments.account_id "
+                    "GROUP BY Kurssi.id")
+        res = db.engine.execute(stmt)
+        response = []
+        for row in res:
+            response.append({"course":row[0], "count":row[1]})
+        return response

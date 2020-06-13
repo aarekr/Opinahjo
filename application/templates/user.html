@@ -18,15 +18,23 @@
     <table border="1">
       <tr>
         <th width="200" style="text-align: center">Kurssi</th>
-        <th width="120" style="text-align: center">Maksa kurssi</th>
-        <th width="150" style="text-align: center">Peru ilmoittautuminen</th>
+        <th width="170" style="text-align: center">Maksa kurssi</th>
+        <th width="200" style="text-align: center">Peru ilmoittautuminen</th>
       </tr>
       {% for course in student_my_courses %}
       <tr>
           {% if user.username == course.student %}
           <td>{{course.kurssi}}</td>
-          <td style="text-align: center">maksa-nappi</td>
-          <td style="text-align: center">peruuta-nappi</td>
+          <td style="text-align: center">
+
+              <input type="submit" value="Maksa" style="width:100px"/>
+
+          </td>
+          <td style="text-align: center">
+            <form menthod="POST" action="{{ url_for('disenroll_course', kurssi_id=course.id) }}">
+              <input type="submit" value="Peru" style="width:100px"/>
+            </form>
+          </td>
           {% endif %}
       </tr>
       {% endfor %}
@@ -82,5 +90,10 @@
 <hr>
 {% endif %}
 
+
+{% if user.teacher %}
+  <a href="{{ url_for('show_invoices') }}">Näytä laskutus- ja muut tiedot</a>
+<hr>
+{% endif %}
 
 {% endblock %}

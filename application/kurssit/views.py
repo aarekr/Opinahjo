@@ -113,3 +113,23 @@ def enroll_course(kurssi_id):
     db.session().commit()
 
     return redirect(url_for("kurssit_index"))
+
+# opiskelijan peru ilmoittautuminen
+@app.route("/disenroll/<kurssi_id>/")
+#@login_required
+def disenroll_course(kurssi_id):
+    user = User.query.get(current_user.id)
+    course = Kurssi.query.get(kurssi_id)
+
+    course.users.remove(user)
+    db.session().commit()
+#    if deleted_course.account_id != current_user.id:
+#        return "Et voi perua tätä ilmoittautumista!"
+
+#    db.session().delete(deleted_course)
+#    db.session().commit()
+    print("*****perutaan ilmoittautuminen*****")
+
+#    return "Kurssi-ilmoittautuminen peruttu"
+
+    return redirect(url_for("kurssit_index"))

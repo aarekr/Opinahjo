@@ -3,8 +3,6 @@
 
 {% block body %}
 
-hei kaikkilaskut
-
 <form method="GET" action="{{ url_for('show_invoices') }}">
   <input type="text" name="name"/>
   <input type="submit" value="Näytä laskut"/>
@@ -13,7 +11,7 @@ hei kaikkilaskut
 <hr>
 
 {% if courses_and_enrollments_count is defined %}
-  <b>Kaikki kurssit ja ilmoittautuneet</b> <br />
+  <b>Kurssit ja ilmoittautumismäärät</b> <br />
   <table border="1">
     <tr>
       <th width="200" style="text-align: center">Kurssi</th>

@@ -32,7 +32,7 @@ def kurssit_form():
 @app.route("/kurssit/", methods=["POST"])
 @login_required
 def kurssit_create(): # useampi samanniminen kurssi sallittu tarkoituksella
-    if not current_user.teacher: # jos ei-opettaja lisäämässä uutta kurssia
+    if not current_user.teacher:
         return redirect(url_for("kurssit_index"))
 
     form = CourseForm(request.form)
@@ -46,7 +46,6 @@ def kurssit_create(): # useampi samanniminen kurssi sallittu tarkoituksella
         form.end_date.errors.append("Tarkista päivämäärä")
         return render_template("kurssit/update.html", form = form)
 
-#    course = Kurssi(form.name.data, form.start_date.data, form.end_date.data)
     course.account_id = current_user.id
 
     db.session().add(course)
@@ -116,20 +115,12 @@ def enroll_course(kurssi_id):
 
 # opiskelijan peru ilmoittautuminen
 @app.route("/disenroll/<kurssi_id>/")
-#@login_required
+@login_required
 def disenroll_course(kurssi_id):
     user = User.query.get(current_user.id)
     course = Kurssi.query.get(kurssi_id)
 
     course.users.remove(user)
     db.session().commit()
-#    if deleted_course.account_id != current_user.id:
-#        return "Et voi perua tätä ilmoittautumista!"
-
-#    db.session().delete(deleted_course)
-#    db.session().commit()
-    print("*****perutaan ilmoittautuminen*****")
-
-#    return "Kurssi-ilmoittautuminen peruttu"
 
     return redirect(url_for("kurssit_index"))

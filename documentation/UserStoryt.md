@@ -29,6 +29,10 @@ As a teacher, I can list all courses offered by the school and their details. (S
 
 As a teacher, I can add new courses to the curriculum.
 
+As a teacher, I can update course information.
+
+As a teacher, I can delete courses.
+
 As a teacher, I can list the courses I am currently teaching.
 
     SELECT Kurssi.id, Kurssi.name, Kurssi.account_id

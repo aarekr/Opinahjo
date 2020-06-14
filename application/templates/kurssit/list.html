@@ -7,7 +7,7 @@
   {% if school_total_courses_offered is defined %}
     <b>Tarjoamme tällä hetkellä
       {% for lkm in school_total_courses_offered %}
-        {{lkm.course_count}} kurssia.
+        {{ lkm.course_count }} kurssia.
       {% endfor %} </b>
   {% endif %}
 
@@ -15,7 +15,7 @@
   {% if school_teachers_total is defined %}
     <b>Koulussamme on
       {% for lkm in school_teachers_total %}
-        {{lkm.teacher_count}} opettajaa.
+        {{ lkm.teacher_count }} opettajaa.
       {% endfor %} </b> <br /> <br />
   {% endif %}
 
@@ -38,9 +38,9 @@
     <tr>
       <td style="text-align: center">{{ kurssi.id }}</td>
       <td>{{ kurssi.kurssi }}</td>
-      <td style="text-align: center">{{kurssi.opettaja}}</td>
-      <td style="text-align: center">{{kurssi.start_date}}</td>
-      <td style="text-align: center">{{kurssi.end_date}}</td>
+      <td style="text-align: center">{{ kurssi.opettaja }}</td>
+      <td style="text-align: center">{{ kurssi.start_date }}</td>
+      <td style="text-align: center">{{ kurssi.end_date }}</td>
       <!-- opettajalle ei näytetä ilmoittautumisnappia -->
       {% if not current_user.teacher %}
       <td>
@@ -63,7 +63,7 @@
     <ul>
       {% for kurssi in student_my_courses %}
         {% if current_user.username == kurssi.student %}
-          <li>{{kurssi.kurssi}}</li>
+          <li>{{ kurssi.kurssi }}</li>
         {% endif %}
       {% endfor %}
     </ul>

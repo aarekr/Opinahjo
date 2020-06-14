@@ -40,3 +40,8 @@ Huom! Opettajatilin voi luoda tästä: https://opinahjo-105a.herokuapp.com/opett
 
 1. opettaja-tunnukset: opettaja 1 ja opettaja 2, salasana: sala
 2. opiskelija-tunnukset: opisk 1, opisk 2 ja opisk 3, salasana: ak
+
+
+### Jatkokehitysideat ja puuttuvat ominaisuudet
+1. Nimi ja käyttäjätunnus käsitellään sovelluksessa samana mutta ne voisi eriyttää ts. kysyä käyttäjätilin rekisteröinnin yhteydessä molempia.
+2. Kurssin ominaisuuksiin voisi lisätä opetuspaikan, hinnan, tarkemman kuvauksen ja muita vastaavia tarpeen mukaan.

@@ -7,11 +7,13 @@ Tsohan harjoitustyö, alkukesä 2020
 
 Heroku: [Opinahjo](https://opinahjo-105a.herokuapp.com/)
 
-[Tietokantakaavio](https://github.com/aarekr/Opinahjo/blob/master/Opinahjo%20tietokantakaavio.PNG)
+[Tietokantakaavio](https://github.com/aarekr/Opinahjo/blob/master/documentation/Tietokantakaavio.pdf)
 
-[User storyt](https://github.com/aarekr/Opinahjo/blob/master/documentation/user_storyt.txt)
+[User storyt](https://github.com/aarekr/Opinahjo/blob/master/documentation/UserStoryt.md)
 
 [Käyttöohje](https://github.com/aarekr/Opinahjo/blob/master/documentation/Opinahjon%20k%C3%A4ytt%C3%B6ohje.pdf)
+
+[CREATE TABLE -lauseet](https://github.com/aarekr/Opinahjo/blob/master/documentation/CREATE%20TABLE%20-lauseet.md)
 
 --------
 
@@ -25,7 +27,7 @@ Kurssikeskus järjestää maksullisia ohjelmoinnin kursseja. Jokaisen ohjelmoint
 4. Omien kurssien (opiskelija) ja opetuksen (opettaja) tarkastelu
 5. Ilmoittautuneiden luettelo (opettaja)
 6. Varauksen peruutus kurssikeskuksen toimesta, jos maksua ei ole maksettu
-7. Ilmoittautumisen peruutus opiskelijann toimesta
+7. Ilmoittautumisen peruutus opiskelijan toimesta
 8. Kurssin peruutus
 
 

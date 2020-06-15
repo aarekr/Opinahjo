@@ -44,7 +44,7 @@ def create_user():
     form = RegistrationForm(request.form)
     if not form.validate():
         return render_template("auth/newuserregistration.html", form = form)
-    nimi = request.form.get("username") # nimi = käyttäjätunnus
+    nimi = request.form.get("username") # nimi = käyttäjätunnus = username
     student = True
     teacher = False
     user_role = "STUDENT"
@@ -67,7 +67,8 @@ def create_teacher():
     form = RegistrationForm(request.form)
     if not form.validate():
         return render_template("auth/uudenopettajanrekisterointi.html", form = form)
-    nimi = request.form.get("username") # nimi = käyttäjätunnus
+    # nimi = käyttäjätunnus = username - nämä on pidetty yksinkertaisuuden vuoksi samana
+    nimi = request.form.get("username")
     student = False
     teacher = True
     user_role = "TEACHER"

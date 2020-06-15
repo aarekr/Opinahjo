@@ -14,9 +14,9 @@ class LoginForm(FlaskForm):
 
 # userin rekisteröintilomake
 class RegistrationForm(FlaskForm):
-    username = StringField("Käyttäjätunnus", [validators.Length(min=3, max=10)])
-    password = PasswordField("Salasana", [validators.Length(min=2, max=20)])
-    password2 = PasswordField('Toista salasana', [validators.Length(min=2, max=20), EqualTo('password')])
+    username = StringField("Käyttäjätunnus", [validators.Length(min=3, max=10, message="Käyttäjätunnuksen oltava 3-10 merkkiä pitkä")])
+    password = PasswordField("Salasana", [validators.Length(min=2, max=20, message="Salasanan oltava 2-20 merkin pituinen")])
+    password2 = PasswordField('Toista salasana', [validators.Length(min=2, max=20), EqualTo('password', message="Salasanojen oltava samoja")])
     submit = SubmitField('Luo käyttäjätili')
 
     def validate_username(self, username):

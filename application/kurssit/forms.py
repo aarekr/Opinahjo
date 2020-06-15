@@ -3,7 +3,7 @@ from wtforms import StringField, BooleanField, DateField, SubmitField, validator
 from datetime import date
 
 class CourseForm(FlaskForm):
-    name = StringField("Kurssin nimi", [validators.Length(min=2, max=20)])
+    name = StringField("Kurssin nimi", [validators.Length(min=2, max=20, message="Kurssin nimen pituuden oltava 2-20 merkkiä")])
     start_date = DateField("Alkaa", default=date.today)
     end_date = DateField("Loppuu", default=date.today)
     submit = SubmitField('Lisää opetusohjelmaan')

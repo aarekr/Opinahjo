@@ -43,5 +43,8 @@ Huom! Opettajatilin voi luoda tästä: https://opinahjo-105a.herokuapp.com/opett
 
 
 ### Jatkokehitysideat ja puuttuvat ominaisuudet
-1. Nimi ja käyttäjätunnus käsitellään sovelluksessa samana mutta ne voisi eriyttää ts. kysyä käyttäjätilin rekisteröinnin yhteydessä molempia.
-2. Kurssin ominaisuuksiin voisi lisätä opetuspaikan, hinnan, tarkemman kuvauksen ja muita vastaavia tarpeen mukaan.
+1. Yhtenä merkittävänä puutteena on suomen ja englannin sekakäyttö nimeämisissä. Tämä tulisi yhtenäistää vaikka muutos on joissakin kohdissa työläs.
+2. Nimi ja käyttäjätunnus käsitellään sovelluksessa samana mutta ne voisi eriyttää ts. kysyä käyttäjätilin rekisteröinnin yhteydessä molempia.
+3. Kurssin ominaisuuksiin voisi lisätä opetuspaikan, hinnan, tarkemman kuvauksen ja muita vastaavia tarpeen mukaan.
+4. Osa auth-kansion models-tiedoston toiminnoista voisi siirtää kurssit-kansioon
+5. Oikean yläkulman Kirjaudu sisään / Rekisteröidy on toteutettu yhtenä linkkinä mutta sen voi halutessaan toteuttaa kahtena eri linkkinä.

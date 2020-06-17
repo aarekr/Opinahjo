@@ -124,7 +124,7 @@ class User(Base):
 
     @staticmethod # opiskelijat ja heidän ilmoittautumismäärät
     def student_enrollments_count():
-        stmt = text("SELECT Account.name, COUNT(Kurssi.id), Account.student "
+        stmt = text("SELECT Account.id, Account.name, COUNT(Kurssi.id), Account.student "
                     "FROM Account "
                     "LEFT JOIN enrollments ON Account.id=enrollments.account_id "
                     "LEFT JOIN Kurssi ON Kurssi.id=enrollments.kurssi_id "
@@ -132,7 +132,7 @@ class User(Base):
         res = db.engine.execute(stmt)
         response = []
         for row in res:
-            response.append({"name":row[0], "count":row[1], "student":row[2]})
+            response.append({"id":row[0], "name":row[1], "count":row[2], "student":row[3]})
         return response
 
     @staticmethod # kaikki kurssit ja ilmoittautumismäärät

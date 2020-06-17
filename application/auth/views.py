@@ -36,14 +36,14 @@ def auth_logout():
 # uuden opiskelijatilin rekisteröinti
 @app.route("/auth/register")
 def user_registration():
-    return render_template("auth/newuserregistration.html", form = RegistrationForm())
+    return render_template("auth/newstudentregistration.html", form = RegistrationForm())
 
 # uuden opiskelijan luonti
 @app.route("/auth/", methods=["POST"])
 def create_user():
     form = RegistrationForm(request.form)
     if not form.validate():
-        return render_template("auth/newuserregistration.html", form = form)
+        return render_template("auth/newstudentregistration.html", form = form)
     nimi = request.form.get("username") # nimi = käyttäjätunnus = username
     student = True
     teacher = False
@@ -56,17 +56,17 @@ def create_user():
 
 
 # uuden opettajatilin rekisteröinti
-@app.route("/opettaja")
+@app.route("/teacher")
 def teacher_registration():
-    return render_template("auth/uudenopettajanrekisterointi.html", form = RegistrationForm())
+    return render_template("auth/newteacherregistration.html", form = RegistrationForm())
 
-# uuden opettajan luonti
-@app.route("/opettaja", methods=["POST"])
+# uuden opettajatilin luonti
+@app.route("/teacher", methods=["POST"])
 #@login_required #(role="ADMIN")     # tilapäisesti pois käytöstä
 def create_teacher():
     form = RegistrationForm(request.form)
     if not form.validate():
-        return render_template("auth/uudenopettajanrekisterointi.html", form = form)
+        return render_template("auth/newteacherregistration.html", form = form)
     # nimi = käyttäjätunnus = username - nämä on pidetty yksinkertaisuuden vuoksi samana
     nimi = request.form.get("username")
     student = False
@@ -82,3 +82,21 @@ def create_teacher():
 @app.route("/auth/accountcreated")
 def account_created():
     return render_template("auth/accountcreated.html")
+
+
+# opiskelijatilin muokkaus
+
+# opiskelijatilin poisto
+@app.route("/deletestudent/<student_id>/", methods=["POST"])
+def delete_student(student_id):
+    deleted_student = User.query.get(student_id)
+
+    db.session().delete(deleted_student)
+    db.session().commit()
+
+    return redirect(url_for("account_deleted"))
+
+# vahvistetaan, että opiskelijatili on poistettu
+@app.route("/auth/accountdeleted")
+def account_deleted():
+    return render_template("auth/accountdeleted.html")

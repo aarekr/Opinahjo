@@ -32,14 +32,24 @@
   <b>Opiskelijakohtaiset ilmoittautumismäärät</b> <br />
   <table border="1">
     <tr>
+      <th width="50" style="text-align: center">ID</th>
       <th width="120" style="text-align: center">Opiskelija</th>
       <th width="100" style="text-align: center">Kursseja</th>
+      <th width="170" style="text-align: center">Muokkaa</th>
+      <th width="250" style="text-align: center">Poista opiskelijatili</th>
     </tr>
     {% for row in student_enrollments_count %}
     {% if row.student %}
     <tr>
-      <td style="text-align: center">{{row.name}}</td>
-      <td style="text-align: center">{{row.count}}</td>
+      <td style="text-align: center">{{ row.id }}</td>
+      <td style="text-align: center">{{ row.name }}</td>
+      <td style="text-align: center">{{ row.count }}</td>
+      <td style="text-align: center">...</td>
+      <td style="text-align: center">
+        <form method="POST" action="{{ url_for('delete_student', student_id=row.id) }}">
+          <input type="submit" value="Poista opiskelija" style="width:200px" />
+        </form>
+      </td>
     </tr>
     {% endif %}
     {% endfor %}

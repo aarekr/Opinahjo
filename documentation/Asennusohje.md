@@ -7,14 +7,22 @@ Sovellus pyörii python3 ympäristössä.
 Kloonaa projekti koneellesi komennolla
     git clone https://github.com/aarekr/Opinahjo.git
 
-Asenna projektin riippuvuudet
+Voit myös ladata ZIP-paketin valitsemalla GitHubissa "Clone or download" ja valikosta "Download ZIP". Pura ladattu tiedosto.
+
+Mene ladattuun kansioon ja luo sinne Python-virtuaaliympäristö komennolla
+    python3 -m venv venv
+
+Aktivoi virtuaaliympäristö komennolla
+    source venv/bin/activate
+
+Asenna projektin riippuvuudet komennolla
     pip install -r requirements.txt
 
 Projekti käynnistyy komennolla
     python run.py
 
-Sovellus käynnistyy osoitteessa
-    http://http://localhost:5000/
+Sovellus löytyy osoitteessa
+    http://localhost:5000/
 
 ### Sovelluksen siirto Herokuun
 

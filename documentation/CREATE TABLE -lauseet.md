@@ -14,7 +14,7 @@
 	    PRIMARY KEY (id), 
 	    CHECK (student IN (0, 1)), 
 	    CHECK (teacher IN (0, 1))
-    );
+    )
 
 ### Lasku
      CREATE TABLE lasku (
@@ -23,7 +23,7 @@
 	    date_modified DATETIME, 
 	    numero INTEGER NOT NULL, 
 	    PRIMARY KEY (id)
-    );
+    )
 
 ### Kurssi
     CREATE TABLE kurssi (
@@ -36,7 +36,7 @@
 	    account_id INTEGER NOT NULL, 
 	    PRIMARY KEY (id), 
 	    FOREIGN KEY(account_id) REFERENCES account (id)
-    );
+    )
 
 ### Enrollments
     CREATE TABLE enrollments (
@@ -45,4 +45,4 @@
 	    PRIMARY KEY (kurssi_id, account_id), 
 	    FOREIGN KEY(kurssi_id) REFERENCES kurssi (id), 
 	    FOREIGN KEY(account_id) REFERENCES account (id)
-    );
+    )

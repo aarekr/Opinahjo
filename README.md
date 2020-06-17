@@ -35,7 +35,7 @@ Kurssikeskus järjestää maksullisia ohjelmoinnin kursseja. Jokaisen ohjelmoint
 Luo aluksi 2 opettajatunnusta ja lisää kursseja opetusohjelmaan.
 Luo tämän jälkeen haluamasi määrä opiskelijoita.
 
-Huom! Opettajatilin voi luoda tästä: https://opinahjo-105a.herokuapp.com/opettaja (linkkiä ei tarkoituksella löydy sovelluksesta)
+Huom! Opettajatilin voi luoda tästä: https://opinahjo-105a.herokuapp.com/teacher (linkkiä ei tarkoituksella löydy sovelluksesta)
       Opiskelijatilin voi luoda rekisteröidy-linkin kautta.
 
 1. opettaja-tunnukset: opettaja 1 ja opettaja 2, salasana: sala

@@ -1,16 +1,24 @@
-# User stories and database queries
+# Käyttötapaukset ja SQL-kyselyt
 
-### STUDENT
+### VIERAILIJA, OPISKELIJA, OPETTAJA
 
-As a student, I can list all courses offered by the school and their details.
+Sivulla kävijänä voin listata koulun tarjoamat kurssit ja niiden tarkemmat tiedot. (valmis)
 
     SELECT Kurssi.id, Kurssi.name, Kurssi.start_date, Kurssi.end_date, Account.name 
     FROM Kurssi, Account
     WHERE Kurssi.account_id = Account.id
 
-As a student, I can enroll in courses.
+### OPISKELIJA
 
-As a student, I can list all courses I have enrolled in.
+Opiskelijana voin luoda käyttäjätunnuksen nimelläni. (valmis)
+
+    INSERT INTO Account (name, username, password, student, teacher, user_role) VALUES (?, ?, ?, ?, ?, ?)
+
+Opiskelijana voin ilmoittautua kurssille varaamalla paikan. (valmis)
+
+    INSERT INTO Enrollments (kurssi_id, account_id) VALUES (?, ?)
+
+Opiskelijana voin listata kaikki kurssit, joille olen ilmoittautunut. (valmis)
 
     SELECT Kurssi.id, Kurssi.name, Account.name
     FROM Account, Kurssi, Enrollments
@@ -18,42 +26,46 @@ As a student, I can list all courses I have enrolled in.
     AND Kurssi.id = Enrollments.kurssi_id
     ORDER BY Kurssi.name
 
-As a student, I can pay for the courses I have enrolled in.
+Opiskelijana voin maksaa kurssin, jolle olen ilmoittautunut. (kesken)
 
-As a student, I can cancel my enrollment from a course.
+Opiskelijana voin perua kurssi-ilmoittautumiseni. (valmis)
 
 
-### TEACHER
+### OPETTAJA
 
-As a teacher, I can list all courses offered by the school and their details. (Same as above)
+Opettajana voin lisätä uuden kurssin opetusohjelmaan. (valmis)
 
-As a teacher, I can add new courses to the curriculum.
+    INSERT INTO Kurssi (name, start_date, end_date) VALUES (?, ?, ?)
 
-As a teacher, I can update course information.
+Opettajana voin muokata kurssini tietoja. (valmis)
 
-As a teacher, I can delete courses.
+    UPDATE Kurssi SET name=?, start_date=?, end_date=? WHERE id=?
 
-As a teacher, I can list the courses I am currently teaching.
+Opettajana voin poistaa kurssini opetusohjelmasta. (valmis)
+
+    DELETE FROM Kurssi WHERE id=?
+
+Opettajana voin listata kurssit, joita opetan. (valmis)
 
     SELECT Kurssi.id, Kurssi.name, Kurssi.account_id
     FROM Kurssi
     LEFT JOIN Account ON Account_id = Account.id
 
-As a teacher, I can list my students on all my courses.
+Opettajana voin listata opiskelijani kursseillani. (valmis)
 
     SELECT Account.name, Kurssi.name, Kurssi.account_id
     FROM Kurssi, Account, enrollments
     WHERE Account.id=enrollments.account_id AND Kurssi.id=enrollments.kurssi_id
     ORDER BY Kurssi.name
 
-As a teacher, I can see all courses and number of enrollments per course.
+Opettajana voin listata kaikki kurssit ja niiden opiskelijamäärät. (valmis)
 
     SELECT Kurssi.name, COUNT(Account.id)
     FROM Account, Kurssi, enrollments
     WHERE Kurssi.id=enrollments.kurssi_id AND Account.id=enrollments.account_id
     GROUP BY Kurssi.id
 
-As a teacher, I can see how many classes each student is taking.
+Opettajana näen kuinka monelle kurssille kukin opiskelija on ilmoittautunut. (valmis)
 
     SELECT Account.name, COUNT(Kurssi.id), Account.student
     FROM Account
@@ -61,6 +73,4 @@ As a teacher, I can see how many classes each student is taking.
     LEFT JOIN Kurssi ON Kurssi.id=enrollments.kurssi_id
     GROUP BY Account.id
 
-As a teacher, I can see who of my students have paid their invoices.
-
-
+Opettajana näen ketkä opiskelijoistani ovat maksaneet kurssinsa. (kesken)

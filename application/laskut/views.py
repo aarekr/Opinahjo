@@ -7,7 +7,7 @@ from application.auth.models import User
 @login_required
 def show_invoices():
     if not current_user.teacher:
-        return redirect(url_for("kurssit_index"))
+        return redirect(url_for("index"))
 
     courses_and_enrollments_count = User.courses_and_enrollments_count()
     student_enrollments_count = User.student_enrollments_count()

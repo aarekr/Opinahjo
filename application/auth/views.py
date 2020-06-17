@@ -40,15 +40,15 @@ def user_registration():
 
 # uuden opiskelijan luonti
 @app.route("/auth/", methods=["POST"])
-def create_user():
+def create_student(): # nimi ja käyttäjätunnus käsitelty samana
     form = RegistrationForm(request.form)
     if not form.validate():
         return render_template("auth/newstudentregistration.html", form = form)
-    nimi = request.form.get("username") # nimi = käyttäjätunnus = username
+    username = request.form.get("username")
     student = True
     teacher = False
     user_role = "STUDENT"
-    k = User(nimi, nimi, request.form.get("password"), student, teacher, user_role)
+    k = User(username, username, request.form.get("password"), student, teacher, user_role)
     db.session().add(k)
     db.session().commit()
 
@@ -63,16 +63,15 @@ def teacher_registration():
 # uuden opettajatilin luonti
 @app.route("/teacher", methods=["POST"])
 #@login_required #(role="ADMIN")     # tilapäisesti pois käytöstä
-def create_teacher():
+def create_teacher(): # nimi ja käyttäjätunnus käsitelty samana
     form = RegistrationForm(request.form)
     if not form.validate():
         return render_template("auth/newteacherregistration.html", form = form)
-    # nimi = käyttäjätunnus = username - nämä on pidetty yksinkertaisuuden vuoksi samana
-    nimi = request.form.get("username")
+    username = request.form.get("username")
     student = False
     teacher = True
     user_role = "TEACHER"
-    t = User(nimi, nimi, request.form.get("password"), student, teacher, user_role)
+    t = User(username, username, request.form.get("password"), student, teacher, user_role)
     db.session().add(t)
     db.session().commit()
 

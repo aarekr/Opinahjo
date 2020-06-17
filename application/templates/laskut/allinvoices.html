@@ -3,11 +3,7 @@
 
 {% block body %}
 
-<form method="GET" action="{{ url_for('show_invoices') }}">
-  <input type="text" name="name"/>
-  <input type="submit" value="Näytä laskut"/>
-</form>
-
+<h3>Laskutus- ja muut tiedot</h3>
 <hr>
 
 {% if courses_and_enrollments_count is defined %}
@@ -59,6 +55,14 @@
   </table>
 {% endif %}
   <hr>
+
+
+<form method="GET" action="{{ url_for('show_invoices') }}">
+  <input type="text" name="name"/>
+  <input type="submit" value="Näytä laskut"/>
+</form>
+
+<hr>
 
 
 {% endblock %}

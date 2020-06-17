@@ -2,9 +2,10 @@
 
 {% block body %}
 
+<h3>Kirjautuminen ja rekisteröityminen</h3><hr>
+
 <p>Uusi käyttäjä? <a href="{{ url_for('user_registration') }}">Rekisteröidy tästä!</a></p>
-<hr>
-<br />
+<hr> <br />
 
 <p>Syötä käyttäjätunnus ja salasana<span style="color: red;">{{ error }}</span></p>
 <form method="POST" action="{{ url_for('auth_login') }}">

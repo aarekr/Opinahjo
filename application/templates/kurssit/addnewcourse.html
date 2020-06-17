@@ -3,7 +3,8 @@
 {% block body %}
 
 {% if current_user.teacher %}
-<p>Lisää uusi kurssi syöttämällä pyydetyt tiedot</p>
+<h3>Uuden kurssin lisääminen opetusohjelmaan</h3> <br />
+
 <form method="POST" action="{{ url_for('kurssit_create') }}">
   <table>
     <tr>

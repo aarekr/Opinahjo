@@ -85,9 +85,28 @@ def account_created():
 
 
 # opiskelijatilin muokkaus
+@app.route("/modifystudent/<student_id>/", methods=["GET"])
+@login_required
+def modify_student(student_id):
+    modified_student = User.query.get(student_id)
+    return render_template("auth/updatestudent.html", form = RegistrationForm(), student = modified_student)
+
+# opiskelijatilin päivitys
+@app.route("/updatestudent/<student_id>/", methods=["POST"])
+@login_required
+def update_student(student_id):
+    form = RegistrationForm(request.form)
+    student = User.query.get(student_id)
+
+    student.username = form.username.data
+    student.name = form.username.data
+
+    db.session().commit()
+    return redirect(url_for("kurssit_index"))
 
 # opiskelijatilin poisto
 @app.route("/deletestudent/<student_id>/", methods=["POST"])
+@login_required
 def delete_student(student_id):
     deleted_student = User.query.get(student_id)
 

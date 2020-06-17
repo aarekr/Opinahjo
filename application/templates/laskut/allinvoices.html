@@ -44,7 +44,10 @@
       <td style="text-align: center">{{ row.id }}</td>
       <td style="text-align: center">{{ row.name }}</td>
       <td style="text-align: center">{{ row.count }}</td>
-      <td style="text-align: center">...</td>
+      <td style="text-align: center">
+        <a href="{{ url_for('modify_student', student_id=row.id) }}">
+          <input type="submit" value="Muokkaa" style="width:150px"/></a>
+      </td>
       <td style="text-align: center">
         <form method="POST" action="{{ url_for('delete_student', student_id=row.id) }}">
           <input type="submit" value="Poista opiskelija" style="width:200px" />

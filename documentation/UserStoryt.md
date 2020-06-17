@@ -74,3 +74,7 @@ Opettajana näen kuinka monelle kurssille kukin opiskelija on ilmoittautunut. (v
     GROUP BY Account.id
 
 Opettajana näen ketkä opiskelijoistani ovat maksaneet kurssinsa. (kesken)
+
+Opettajana voin muokata opiskelijatilin tietoja. (valmis)
+
+Opettajana voin poistaa opiskelijatilin. (valmis)

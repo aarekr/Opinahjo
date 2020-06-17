@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h3>Muokkaa opiskelijan tietoja</h3> <br />
+{{ error }}
+<form method="POST" action="{{ url_for('update_student', student_id=student.id) }}">
+  <table>
+    <tr>
+      <td>{{ form.username.label }}</td>
+      <td>{{ form.username(value=student.username) }}</td>
+      <td>{% for error in form.username.errors %}
+          {{ error }}
+          {% endfor %}</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td colspan="3"><input type="submit" value="Tallenna muutos"/></td>
+    </tr>
+  </table>
+</form>
+
+
+
+{% endblock %}

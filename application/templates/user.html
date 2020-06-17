@@ -1,15 +1,15 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    <h1>Hei, {{ user.username }}</h1>
+<h1>Hei, {{ user.username }}</h1>
 
-    <!-- profiili -->
-    {% if user.student %}
-    <h6>(Opiskelija)</h6>
-    {% elif user.teacher %}
-    <h6>(Opettaja)</h6>
-    {% endif %}
-    <hr>
+<!-- profiili -->
+{% if user.student %}
+  <h6>(Opiskelija)</h6>
+{% elif user.teacher %}
+  <h6>(Opettaja)</h6>
+{% endif %}
+<hr>
 
 <!-- opiskelijalle näytetään kurssi-ilmoittautumiset -->
 {% if user.student %}
@@ -77,7 +77,7 @@
       <th width="120" style="text-align: center">Maksettu</th>
     </tr>
     {% for row in all_enrollments %}
-    {% if row.teacher == user.id %}
+    {% if row.teacher == user.id %} <!-- vain kirjautuneen opettajan kurssit näytetään -->
     <tr>
       <td>{{row.course}}</td>
       <td style="text-align: center">{{row.student}}</td>

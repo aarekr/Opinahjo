@@ -49,3 +49,4 @@ Huom! Opettajatilin voi luoda tästä: https://opinahjo-105a.herokuapp.com/teach
 4. Osa auth-kansion models-tiedoston toiminnoista voisi siirtää kurssit-kansioon
 5. Oikean yläkulman Kirjaudu sisään / Rekisteröidy on toteutettu yhtenä linkkinä mutta sen voi halutessaan toteuttaa kahtena eri linkkinä.
 5. Käyttäjän tietoihin voisi lisätä sähköpostiosoitteen ja muita tietoja.
+6. Kursseja ja opiskelijoita poistettaessa opettajalta tulisi vielä varmistaa vahinkojen välttämiseksi, että hän haluaa poistaa ko. tiedon.

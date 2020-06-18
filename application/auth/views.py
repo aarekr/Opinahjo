@@ -30,7 +30,7 @@ def auth_login():
 @app.route("/auth/logout")
 def auth_logout():
     logout_user()
-    return redirect(url_for("kurssit_index"))
+    return redirect(url_for("index"))
 
 
 # uuden opiskelijatilin rekisteröinti
@@ -101,7 +101,7 @@ def update_student(student_id):
     student.name = form.username.data
 
     db.session().commit()
-    return redirect(url_for("kurssit_index"))
+    return redirect(url_for("user", usernimi=current_user.username))
 
 # opiskelijatilin poisto
 @app.route("/deletestudent/<student_id>/", methods=["POST"])

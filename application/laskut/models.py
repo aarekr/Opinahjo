@@ -1,14 +1,14 @@
 from application import db
+from application.models import Base
 
-class Lasku(db.Model):
+class Invoice(Base):
 
-    id = db.Column(db.Integer, primary_key=True)
-    date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
-    date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
-                              onupdate=db.func.current_timestamp())
+    kurssi_id = db.Column(db.Integer, nullable=False)
+    paid = db.Column(db.Boolean, nullable=False)
 
-    numero = db.Column(db.Integer, nullable=False)
+    account_id = db.Column(db.Integer, db.ForeignKey('account.id'),
+                           nullable=False)
 
-    def __init__(self, numero):
-        self.numero = numero
-        self.maksettu = False
+    def __init__(self, kurssi_id):
+        self.kurssi_id = kurssi_id
+        self.paid = False

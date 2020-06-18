@@ -5,7 +5,8 @@ from application import app, db
 from application.kurssit.models import Kurssi
 from application.kurssit.forms import CourseForm
 from application.auth.models import User
-from application.models import enrollments
+from application.models import enrollments, userinvoices
+from application.laskut.models import Invoice
 
 
 # listaa kaikki kurssit, kaikki näkee
@@ -31,9 +32,9 @@ def kurssit_form():
 # lisätään kurssi tietokantaan, sallittu vain opettajille
 @app.route("/kurssit/", methods=["POST"])
 @login_required
-def kurssit_create(): # useampi samanniminen kurssi sallittu tarkoituksella
+def kurssit_create(): # useampi samanniminen kurssi sallittu
     if not current_user.teacher:
-        return redirect(url_for("kurssit_index"))
+        return redirect(url_for("index"))
 
     form = CourseForm(request.form)
     course = Kurssi(form.name.data, form.start_date.data, form.end_date.data)
@@ -50,7 +51,7 @@ def kurssit_create(): # useampi samanniminen kurssi sallittu tarkoituksella
 
     db.session().add(course)
     db.session().commit()
-    return redirect(url_for("kurssit_index"))
+    return redirect(url_for("user", usernimi=current_user.username))
 
 # kurssin deletointi, vain kurssin lisännyt opettaja
 @app.route("/delete/<kurssi_id>/", methods=["POST"])
@@ -63,7 +64,7 @@ def kurssit_delete(kurssi_id):
     db.session().delete(deleted_course)
     db.session().commit()
 
-    return redirect(url_for("kurssit_index"))
+    return redirect(url_for("user", usernimi=current_user.username))
 
 # kurssin muokkaaminen, vain kurssin lisännyt opettaja
 @app.route("/modify/<kurssi_id>", methods=["GET"])
@@ -75,7 +76,7 @@ def kurssit_modify(kurssi_id):
 
     return render_template("kurssit/update.html", form = CourseForm(), kurssi = course)
 
-# kurssin päivitys
+# kurssin päivitys, sallittu vain opettajalle
 @app.route("/kurssit/update/<kurssi_id>", methods=["POST"])
 @login_required
 def kurssit_update(kurssi_id):
@@ -98,7 +99,7 @@ def kurssit_update(kurssi_id):
         return render_template("kurssit/update.html", form = form, kurssi = course)
 
     db.session().commit()
-    return redirect(url_for("kurssit_index"))
+    return redirect(url_for("user", usernimi=current_user.username))
 
 
 # opiskelijan kurssi-ilmoittautuminen
@@ -111,7 +112,7 @@ def enroll_course(kurssi_id):
     course.users.append(user)
     db.session().commit()
 
-    return redirect(url_for("kurssit_index"))
+    return redirect(url_for("user", usernimi=current_user.username))
 
 # opiskelijan peru ilmoittautuminen
 @app.route("/disenroll/<kurssi_id>/")
@@ -123,4 +124,4 @@ def disenroll_course(kurssi_id):
     course.users.remove(user)
     db.session().commit()
 
-    return redirect(url_for("kurssit_index"))
+    return redirect(url_for("user", usernimi=current_user.username))

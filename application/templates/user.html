@@ -18,17 +18,17 @@
     <table border="1">
       <tr>
         <th width="200" style="text-align: center">Kurssi</th>
-        <th width="170" style="text-align: center">Maksa kurssi</th>
+        <th width="200" style="text-align: center">Lasku ja maksu</th>
         <th width="200" style="text-align: center">Peru ilmoittautuminen</th>
       </tr>
       {% for course in student_my_courses %}
       <tr>
           {% if user.username == course.student %}
-          <td>{{course.kurssi}}</td>
+          <td>{{ course.kurssi }}</td>
           <td style="text-align: center">
-
-              <input type="submit" value="Maksa" style="width:100px"/>
-
+            <form menthod="POST" action="{{ url_for('create_invoice', kurssi_id=course.id, user_id=user.id) }}">
+              <input type="submit" value="Luo lasku" style="width:140px"/>
+            </form>
           </td>
           <td style="text-align: center">
             <form menthod="POST" action="{{ url_for('disenroll_course', kurssi_id=course.id) }}">
@@ -52,7 +52,7 @@
   <ul>
     {% for course in teacher_my_courses %}
       {% if user.id==course.teacher %} <!-- kirjautunut opettaja -->
-      <li>{{course.name}} <br/>
+      <li>{{ course.name }} <br/>
       <a href="{{ url_for('kurssit_modify', kurssi_id=course.id) }}">
         <input type="submit" value="Muokkaa" style="width:150px"/></a>
       <form method="POST" action="{{ url_for('kurssit_delete', kurssi_id=course.id) }}">
@@ -79,8 +79,8 @@
     {% for row in all_enrollments %}
     {% if row.teacher == user.id %} <!-- vain kirjautuneen opettajan kurssit näytetään -->
     <tr>
-      <td>{{row.course}}</td>
-      <td style="text-align: center">{{row.student}}</td>
+      <td>{{ row.course }}</td>
+      <td style="text-align: center">{{ row.student }}</td>
       <td style="text-align: center">...</td>
     </tr>
     {% endif %}

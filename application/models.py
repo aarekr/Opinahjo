@@ -5,6 +5,11 @@ enrollments = db.Table('enrollments',                   # tähän:, ondelete='ca
     db.Column('account_id', db.Integer, db.ForeignKey('account.id'), primary_key=True)
 )
 
+userinvoices = db.Table('userinvoices',
+    db.Column('invoice_id', db.Integer, db.ForeignKey('invoice.id'), primary_key=True), 
+    db.Column('account_id', db.Integer, db.ForeignKey('account.id'), primary_key=True)
+)
+
 class Base(db.Model): # Kurssi, User
 
     __abstract__ = True

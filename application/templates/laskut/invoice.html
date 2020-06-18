@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h3>Laskun maksu</h3> <hr>
+
+{% if invoice_number is defined %}
+  Lasku on nyt luotu!<br /><br />
+  Laskun numero: {{ invoice_number }} <br />
+  Laskun summa: 100€ <br />
+
+  <form method="POST" action="{{ url_for('pay_invoice', invoice_number=invoice_number) }}">
+    <input type="submit" value="Maksa lasku"/>
+  </form>
+
+{% endif %}
+
+{% endblock %}

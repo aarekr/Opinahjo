@@ -1,6 +1,6 @@
 from application import db
 from application.models import Base
-from application.models import enrollments
+from application.models import enrollments, userinvoices
 from application.kurssit.models import Kurssi
 from sqlalchemy.sql import text
 
@@ -16,6 +16,7 @@ class User(Base):
     user_role = db.Column(db.String(80))
 
     enrollments = db.relationship('Kurssi', secondary=enrollments,  backref=db.backref('users', lazy=True))
+    userinvoices = db.relationship('Invoice', secondary=userinvoices, backref=db.backref('users', lazy=True))
 
     def __init__(self, name, username, password, student, teacher, user_role):
         self.name = name
@@ -145,4 +146,15 @@ class User(Base):
         response = []
         for row in res:
             response.append({"course":row[0], "count":row[1]})
+        return response
+
+    @staticmethod # kaikki laskut
+    def all_invoices(): # allinvoices.html
+        stmt = text("SELECT Invoice.id, Invoice.kurssi_id, Invoice.paid, Invoice.account_id, Account.name "
+                    "FROM Invoice, Account "
+                    "WHERE Invoice.account_id = Account.id")
+        res = db.engine.execute(stmt)
+        response = []
+        for row in res:
+            response.append({"id":row[0], "kurssi_id":row[1], "paid":row[2], "account_id":row[3], "student_name":row[4]})
         return response

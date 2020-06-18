@@ -3,8 +3,7 @@
 
 {% block body %}
 
-<h3>Laskutus- ja muut tiedot</h3>
-<hr>
+<h3>Laskutus- ja muut tiedot</h3> <hr>
 
 {% if courses_and_enrollments_count is defined %}
   <b>Kurssit ja ilmoittautumismäärät</b> <br />
@@ -15,8 +14,8 @@
     </tr>
     {% for row in courses_and_enrollments_count %}
     <tr>
-      <td>{{row.course}}</td>
-      <td style="text-align: center">{{row.count}}</td>
+      <td>{{ row.course }}</td>
+      <td style="text-align: center">{{ row.count }}</td>
     </tr>
     {% endfor %}
   </table>
@@ -31,8 +30,8 @@
       <th width="50" style="text-align: center">ID</th>
       <th width="120" style="text-align: center">Opiskelija</th>
       <th width="100" style="text-align: center">Kursseja</th>
-      <th width="170" style="text-align: center">Muokkaa</th>
-      <th width="250" style="text-align: center">Poista opiskelijatili</th>
+      <th width="200" style="text-align: center">Muokkaa opiskelijatiliä</th>
+      <th width="200" style="text-align: center">Poista opiskelijatili</th>
     </tr>
     {% for row in student_enrollments_count %}
     {% if row.student %}
@@ -42,28 +41,45 @@
       <td style="text-align: center">{{ row.count }}</td>
       <td style="text-align: center">
         <a href="{{ url_for('modify_student', student_id=row.id) }}">
-          <input type="submit" value="Muokkaa" style="width:150px"/></a>
+          <input type="submit" value="Muokkaa" style="width:120px"/></a>
       </td>
       <td style="text-align: center">
         <form method="POST" action="{{ url_for('delete_student', student_id=row.id) }}">
-          <input type="submit" value="Poista opiskelija" style="width:200px" />
+          <input type="submit" value="Poista" style="width:120px" />
         </form>
       </td>
     </tr>
     {% endif %}
     {% endfor %}
   </table>
-{% endif %}
   <hr>
+{% endif %}
 
 
-<form method="GET" action="{{ url_for('show_invoices') }}">
-  <input type="text" name="name"/>
-  <input type="submit" value="Näytä laskut"/>
-</form>
-
-<hr>
-
+{% if all_invoices is defined %}
+  <b>Kaikki laskut</b> <br />
+  <table border="1">
+    <tr>
+      <th width="80" style="text-align: center">Lasku</th>
+      <th width="80" style="text-align: center">Kurssi id</th>
+      <th width="100" style="text-align: center">Maksettu</th>
+      <th width="120" style="text-align: center">Opiskelija</th>
+    </tr>
+    {% for row in all_invoices %}
+    <tr>
+      <td style="text-align: center">{{ row.id }}</td>
+      <td style="text-align: center">{{ row.kurssi_id }}</td>
+      <td style="text-align: center">
+        {% if row.paid %} Joo
+        {% elif not row.paid %} Ei
+        {% endif %}
+      </td>
+      <td style="text-align: center">{{ row.student_name }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <hr>
+{% endif %}
 
 {% endblock %}
 

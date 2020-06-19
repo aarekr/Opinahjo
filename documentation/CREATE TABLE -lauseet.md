@@ -17,12 +17,16 @@
     )
 
 ### Lasku
-     CREATE TABLE lasku (
+     CREATE TABLE invoice (
 	    id INTEGER NOT NULL, 
 	    date_created DATETIME, 
 	    date_modified DATETIME, 
-	    numero INTEGER NOT NULL, 
-	    PRIMARY KEY (id)
+            kurssi_id INTEGER NOT NULL, 
+	    paid BOOLEAN NOT NULL, 
+	    account_id INTEGER NOT NULL, 
+	    PRIMARY KEY (id), 
+	    CHECK (paid IN (0, 1)), 
+	    FOREIGN KEY(account_id) REFERENCES account (id)
     )
 
 ### Kurssi
@@ -46,3 +50,13 @@
 	    FOREIGN KEY(kurssi_id) REFERENCES kurssi (id), 
 	    FOREIGN KEY(account_id) REFERENCES account (id)
     )
+
+### Userinvoice
+(tätä ei ole toteutettu sovelluksessa)
+CREATE TABLE userinvoices (
+	    invoice_id INTEGER NOT NULL, 
+	    account_id INTEGER NOT NULL, 
+	    PRIMARY KEY (invoice_id, account_id), 
+	    FOREIGN KEY(invoice_id) REFERENCES invoice (id), 
+	    FOREIGN KEY(account_id) REFERENCES account (id)
+)

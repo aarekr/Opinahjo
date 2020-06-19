@@ -9,7 +9,7 @@ from application.models import enrollments, userinvoices
 from application.laskut.models import Invoice
 
 
-# listaa kaikki kurssit, kaikki näkee
+# listaa kaikki kurssit, näytetään kaikille
 @app.route("/kurssit", methods=["GET"])
 def kurssit_index():
     courses = Kurssi.query.all()

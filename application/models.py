@@ -1,6 +1,6 @@
 from application import db
 
-enrollments = db.Table('enrollments',                   # tähän:, ondelete='cascade'  -molempiin
+enrollments = db.Table('enrollments', 
     db.Column('kurssi_id', db.Integer, db.ForeignKey('kurssi.id'), primary_key=True), 
     db.Column('account_id', db.Integer, db.ForeignKey('account.id'), primary_key=True)
 )
@@ -10,7 +10,7 @@ userinvoices = db.Table('userinvoices',
     db.Column('account_id', db.Integer, db.ForeignKey('account.id'), primary_key=True)
 )
 
-class Base(db.Model): # Kurssi, User
+class Base(db.Model): # Kurssi, User, Invoice
 
     __abstract__ = True
 

@@ -26,9 +26,8 @@ Kurssikeskus järjestää maksullisia ohjelmoinnin kursseja. Jokaisen ohjelmoint
 3. Kurssin syöttö ja muokkaus (vain opettaja)
 4. Omien kurssien (opiskelija) ja opetuksen (opettaja) tarkastelu
 5. Ilmoittautuneiden luettelo (opettaja)
-6. Varauksen peruutus kurssikeskuksen toimesta, jos maksua ei ole maksettu
-7. Ilmoittautumisen peruutus opiskelijan toimesta
-8. Kurssin peruutus
+6. Kurssin peruutus ja opiskelijatilin poisto kurssikeskuksen toimesta
+7. Ilmoittautumisen maksaminen ja peruutus opiskelijan toimesta
 
 
 ### Testitunnukset
@@ -49,4 +48,6 @@ Huom! Opettajatilin voi luoda tästä: https://opinahjo-105a.herokuapp.com/teach
 4. Osa auth-kansion models-tiedoston toiminnoista voisi siirtää kurssit-kansioon
 5. Oikean yläkulman Kirjaudu sisään / Rekisteröidy on toteutettu yhtenä linkkinä mutta sen voi halutessaan toteuttaa kahtena eri linkkinä.
 5. Käyttäjän tietoihin voisi lisätä sähköpostiosoitteen ja muita tietoja.
-6. Kursseja ja opiskelijoita poistettaessa opettajalta tulisi vielä varmistaa vahinkojen välttämiseksi, että hän haluaa poistaa ko. tiedon.
+6. Kursseja ja opiskelijoita poistettaessa opettajalta tulisi vielä varmistaa, että hän haluaa poistaa ko. tiedon.
+7. Laskun maksu on sovelluksessa toteutettu klikkaamalla Maksa lasku-nappia. Tämän voisi muuttaa nettipankkiin kirjautumiseksi, korttitietojen kyselyksi ja muiksi maksuvaihtoehdoiksi.
+8. Opiskelija voi luoda samasta kurssista useamman laskun. Tämä tulisi estää.

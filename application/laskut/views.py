@@ -24,10 +24,6 @@ def show_invoices():
 # opiskelija luo laskun
 @app.route("/invoices/create/<kurssi_id>/<user_id>/")
 def create_invoice(kurssi_id, user_id):
-    print("*****Opiskelija luo laskun")
-    print("*****Kurssi_id: ", kurssi_id)
-    print("*****User___id: ", user_id)
-
     course = Kurssi.query.get(kurssi_id)
     invoice = Invoice(kurssi_id)
 
@@ -37,7 +33,6 @@ def create_invoice(kurssi_id, user_id):
     db.session().commit()
 
     invoice = Invoice.query.get(invoice.id)
-    print("*****Laskun numero: ", invoice.id)
     invoice_number = invoice.id
 
     return render_template("laskut/invoice.html", 
@@ -47,10 +42,9 @@ def create_invoice(kurssi_id, user_id):
 # opiskelija maksaa laskun
 @app.route("/invoices/pay/<invoice_number>/", methods=["POST"])
 def pay_invoice(invoice_number):
-    print("*****Maksetaan lasku ", invoice_number)
     invoice = Invoice.query.get(invoice_number)
     invoice.paid = True
-    print("*****Lasku maksettu: ", invoice.paid)
+
     db.session().commit()
 
     return redirect(url_for("index"))

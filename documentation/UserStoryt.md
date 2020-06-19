@@ -16,19 +16,23 @@ Opiskelijana voin luoda käyttäjätunnuksen nimelläni. (valmis)
 
 Opiskelijana voin ilmoittautua kurssille varaamalla paikan. (valmis)
 
-    INSERT INTO Enrollments (kurssi_id, account_id) VALUES (?, ?)
+    INSERT INTO enrollments (kurssi_id, account_id) VALUES (?, ?)
 
 Opiskelijana voin listata kaikki kurssit, joille olen ilmoittautunut. (valmis)
 
     SELECT Kurssi.id, Kurssi.name, Account.name
-    FROM Account, Kurssi, Enrollments
-    WHERE Account.id = Enrollments.account_id
-    AND Kurssi.id = Enrollments.kurssi_id
+    FROM Account, Kurssi, enrollments
+    WHERE Account.id = enrollments.account_id
+    AND Kurssi.id = enrollments.kurssi_id
     ORDER BY Kurssi.name
 
-Opiskelijana voin maksaa kurssin, jolle olen ilmoittautunut. (kesken)
+Opiskelijana voin maksaa kurssin, jolle olen ilmoittautunut. (valmis)
+
+    UPDATE Invoice SET paid=True WHERE id=?
 
 Opiskelijana voin perua kurssi-ilmoittautumiseni. (valmis)
+
+    DELETE FROM enrollments WHERE kurssi_id=?, account_id=?
 
 
 ### OPETTAJA
@@ -69,12 +73,20 @@ Opettajana näen kuinka monelle kurssille kukin opiskelija on ilmoittautunut. (v
 
     SELECT Account.name, COUNT(Kurssi.id), Account.student
     FROM Account
-    LEFT JOIN enrollments ON Account.id=enrollments.account_id
+    LEFT JOIN Enrollments ON Account.id=enrollments.account_id
     LEFT JOIN Kurssi ON Kurssi.id=enrollments.kurssi_id
     GROUP BY Account.id
 
-Opettajana näen ketkä opiskelijoistani ovat maksaneet kurssinsa. (kesken)
+Opettajana näen ketkä opiskelijoistani ovat maksaneet kurssinsa. (valmis)
+
+    SELECT Invoice.id, Invoice.kurssi_id, Invoice.paid, Invoice.account_id, Account.name
+    FROM Invoice, Account
+    WHERE Invoice.account_id = Account.id
 
 Opettajana voin muokata opiskelijatilin tietoja. (valmis)
 
+    UPDATE Account SET username=? WHERE id=?
+
 Opettajana voin poistaa opiskelijatilin. (valmis)
+
+    DELETE FROM Account WHERE id=?

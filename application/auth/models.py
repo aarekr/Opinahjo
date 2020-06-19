@@ -49,7 +49,6 @@ class User(Base):
         stmt = text("SELECT Account.id, Account.name, Account.student "
                     "FROM Account")
         res = db.engine.execute(stmt)
-
         response = []
         for row in res:
             response.append({"id":row[0], "name":row[1], "student":row[2]})
@@ -62,7 +61,6 @@ class User(Base):
                     "FROM Kurssi "
                     "LEFT JOIN Account ON Account_id = Account.id ")
         res = db.engine.execute(stmt)
-
         response = []
         for row in res:
             response.append({"id":row[0], "name":row[1], "teacher":row[2]})
@@ -76,6 +74,7 @@ class User(Base):
         response = []
         for row in res:
             response.append({"course_count":row[0]})
+
         return response
 
     @staticmethod # opettajien lkm
@@ -85,6 +84,7 @@ class User(Base):
         response = []
         for row in res:
             response.append({"teacher_count":row[0]})
+
         return response
 
     @staticmethod # yhteenveto: kurssit ja opettajat
@@ -96,6 +96,7 @@ class User(Base):
         response = []
         for row in res:
             response.append({"id":row[0], "kurssi":row[1], "start_date":row[2], "end_date":row[3], "opettaja":row[4]})
+
         return response
 
     @staticmethod # opiskelijan kurssi-ilmoittautumiset
@@ -109,6 +110,7 @@ class User(Base):
         response = []
         for row in res:
             response.append({"id":row[0], "kurssi":row[1], "student":row[2]})
+
         return response
 
     @staticmethod # kaikki opiskelijat, mille kurssille ilmoittautunut, opettaja-id
@@ -121,6 +123,7 @@ class User(Base):
         response = []
         for row in res:
             response.append({"student":row[0], "course":row[1], "teacher":row[2]})
+
         return response
 
     @staticmethod # opiskelijat ja heidän ilmoittautumismäärät
@@ -134,6 +137,7 @@ class User(Base):
         response = []
         for row in res:
             response.append({"id":row[0], "name":row[1], "count":row[2], "student":row[3]})
+
         return response
 
     @staticmethod # kaikki kurssit ja ilmoittautumismäärät
@@ -146,6 +150,7 @@ class User(Base):
         response = []
         for row in res:
             response.append({"course":row[0], "count":row[1]})
+
         return response
 
     @staticmethod # kaikki laskut
@@ -157,4 +162,5 @@ class User(Base):
         response = []
         for row in res:
             response.append({"id":row[0], "kurssi_id":row[1], "paid":row[2], "account_id":row[3], "student_name":row[4]})
+
         return response

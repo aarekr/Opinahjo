@@ -7,9 +7,11 @@ Tsohan harjoitustyö, alkukesä 2020
 
 Heroku: [Opinahjo](https://opinahjo-105a.herokuapp.com/)
 
-[Tietokantakaavio](https://github.com/aarekr/Opinahjo/blob/master/documentation/Tietokantakaavio.pdf)
+[Tietokantakaavio](https://github.com/aarekr/Opinahjo/blob/master/documentation/Tietokantakaavio.PNG)
 
 [User storyt](https://github.com/aarekr/Opinahjo/blob/master/documentation/UserStoryt.md)
+
+[Asennusohje](https://github.com/aarekr/Opinahjo/blob/master/documentation/Asennusohje.md)
 
 [Käyttöohje](https://github.com/aarekr/Opinahjo/blob/master/documentation/Opinahjon%20k%C3%A4ytt%C3%B6ohje.pdf)
 
@@ -18,14 +20,15 @@ Heroku: [Opinahjo](https://opinahjo-105a.herokuapp.com/)
 --------
 
 ### Aihekuvaus
-Kurssikeskus järjestää maksullisia ohjelmoinnin kursseja. Jokaisen ohjelmointikielen kursseja on vuoden aikana useampia. Joidenkin kurssien osallistumismäärä on rajoitettu 20 opiskelijaan, toisilla rajoituksia ei ole. Kursseista on laadittu esitteet, joista selviävät ajat ja opettajat. Kuka tahansa voi ilmoittautua kursseille. Ilmoittautuneiden täytyy maksaa varausmaksu. Tarkemmat maksutiedot lähetetään ilmoittautumisen jälkeen. Ilmoittautunut saa halutessaan laskun.
+Kurssikeskus järjestää maksullisia (100 euroa/kpl) ohjelmoinnin kursseja. Jokaisen ohjelmointikielen kursseja on vuoden aikana useampia. Opiskelijat voivat ilmoittautua kursseille eikä esitietovaatimuksia ole. Koulun opetusohjelmasivulla on ilmoitettu tarjottavat kurssit, niiden opettajat ja ajat. Opiskelijan täytyy luoda lasku ja maksaa se osallistuakseen kurssille.
+
 
 ### Sovelluksen toiminnot
-1. Kurssitarjonnan katselu ja kurssipaikan varaaminen
+1. Kurssitarjonnan katselu ja kurssi-ilmoittautuminen
 2. Käyttäjätilin rekisteröinti (vain opiskelija) ja kirjautuminen
-3. Kurssin syöttö ja muokkaus (vain opettaja)
+3. Kurssin lisääminen opetusohjelmaan ja sen muokkaus (vain opettaja)
 4. Omien kurssien (opiskelija) ja opetuksen (opettaja) tarkastelu
-5. Ilmoittautuneiden luettelo (opettaja)
+5. Ilmoittautuneiden ja kurssin maksaneiden opiskelijoiden luettelo (opettaja)
 6. Kurssin peruutus ja opiskelijatilin poisto kurssikeskuksen toimesta
 7. Ilmoittautumisen maksaminen ja peruutus opiskelijan toimesta
 
@@ -44,10 +47,11 @@ Huom! Opettajatilin voi luoda tästä: https://opinahjo-105a.herokuapp.com/teach
 ### Jatkokehitysideat ja puuttuvat ominaisuudet
 1. Yhtenä merkittävänä puutteena on suomen ja englannin sekakäyttö nimeämisissä. Tämä tulisi yhtenäistää vaikka muutos on joissakin kohdissa työläs.
 2. Nimi ja käyttäjätunnus käsitellään sovelluksessa samana mutta ne voisi eriyttää ts. kysyä käyttäjätilin rekisteröinnin yhteydessä molempia.
-3. Kurssin ominaisuuksiin voisi lisätä opetuspaikan, hinnan, tarkemman kuvauksen ja muita vastaavia tarpeen mukaan.
-4. Osa auth-kansion models-tiedoston toiminnoista voisi siirtää kurssit-kansioon
-5. Oikean yläkulman Kirjaudu sisään / Rekisteröidy on toteutettu yhtenä linkkinä mutta sen voi halutessaan toteuttaa kahtena eri linkkinä.
+3. Kurssin ominaisuuksiin voisi lisätä opetuspaikan, tarkemman kuvauksen ja muita vastaavia tarpeen mukaan.
+4. Osa auth-kansion models-tiedoston toiminnoista voisi siirtää kurssit-kansioon.
+5. Oikean yläkulman Kirjaudu sisään / Rekisteröidy on toteutettu yhtenä linkkinä mutta sen voi halutessaan toteuttaa erillisinä.
 5. Käyttäjän tietoihin voisi lisätä sähköpostiosoitteen ja muita tietoja.
 6. Kursseja ja opiskelijoita poistettaessa opettajalta tulisi vielä varmistaa, että hän haluaa poistaa ko. tiedon.
 7. Laskun maksu on sovelluksessa toteutettu klikkaamalla Maksa lasku-nappia. Tämän voisi muuttaa nettipankkiin kirjautumiseksi, korttitietojen kyselyksi ja muiksi maksuvaihtoehdoiksi.
 8. Opiskelija voi luoda samasta kurssista useamman laskun. Tämä tulisi estää.
+9. Autorisointia tulisi tarkentaa. Tällä hetkellä käyttäjillä pääsy joihinkin toimintoihin, joita ei ole tarkoitettu heille.

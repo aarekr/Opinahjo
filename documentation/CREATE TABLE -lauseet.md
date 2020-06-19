@@ -51,9 +51,10 @@
 	    FOREIGN KEY(account_id) REFERENCES account (id)
     )
 
-### Userinvoice
-(tätä ei ole toteutettu sovelluksessa)
-CREATE TABLE userinvoices (
+### Userinvoices
+(tämä ei ole käytössä sovelluksessa)
+
+    CREATE TABLE userinvoices (
 	    invoice_id INTEGER NOT NULL, 
 	    account_id INTEGER NOT NULL, 
 	    PRIMARY KEY (invoice_id, account_id), 
